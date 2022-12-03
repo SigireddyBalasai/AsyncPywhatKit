@@ -3,7 +3,7 @@ from typing import Optional
 from PIL import Image
 
 
-def image_to_ascii_art(
+async def image_to_ascii_art(
     img_path: str, output_file: Optional[str] = "pywhatkit_asciiart"
 ) -> str:
     """Convert an Image to ASCII Art"""

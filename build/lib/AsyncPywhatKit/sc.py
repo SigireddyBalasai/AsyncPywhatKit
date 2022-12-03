@@ -9,7 +9,7 @@ except ImportError or ModuleNotFoundError:
 osname = platform.system()
 
 
-def shutdown(time: int = 20) -> None:
+async def shutdown(time: int = 20) -> None:
     """Schedules a Shutdown after the Specified Time"""
 
     if "window" in osname.lower():

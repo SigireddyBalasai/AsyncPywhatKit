@@ -7,7 +7,7 @@ from typing import Union
 from pywhatkit import UnsupportedEmailProvider
 
 
-def send_mail(
+async def send_mail(
     email_sender: str,
     password: str,
     subject: str,
@@ -47,10 +47,10 @@ def send_mail(
         print("Email Sent Successfully!")
 
 
-def send_hmail(
+async def send_hmail(
     email_sender: str, password: str, subject: str, html_code: str, email_receiver: str
 ) -> None:
     """Send an Email with HTML Code"""
 
     message = MIMEText(html_code, "html")
-    send_mail(email_sender, password, subject, message, email_receiver)
+    await send_mail(email_sender, password, subject, message, email_receiver)

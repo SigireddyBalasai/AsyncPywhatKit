@@ -1,3 +1,24 @@
+Metadata-Version: 2.1
+Name: AsyncPywhatKit
+Version: 1.0.0.1
+Summary: AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features
+Home-page: https://github.com/SigireddyBalasai/PyWhatKit
+Download-URL: https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz
+Author: SigireddyBalasai
+Author-email: sigireddybalasai@gmail.com
+License: MIT
+Keywords: sendwhatmsg,info,playonyt,search,watch_tutorial,async pywhatkit
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 ![image](https://media.discordapp.net/attachments/842794167134453820/882227960613048350/unknown.png?width=1440&height=420)
 
 [![image](https://flat.badgen.net/github/stars/SigireddyBalasai/AsyncPywhatKit)](https://github.com/Ankit404butfound/AsyncPywhatKit/stargazers)
@@ -79,3 +100,5 @@ Be sure to read the [Guidelines](https://github.com/SigireddyBalasai/AsyncPywhat
 
 MIT.
 For more information see [this](https://github.com/SigireddyBalasai/AsyncPywhatKit/blob/main/LICENSE)
+
+

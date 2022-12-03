@@ -4,4 +4,3 @@ requests
 wikipedia
 aiohttp
 asyncio
-

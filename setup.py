@@ -8,23 +8,24 @@ def readme() -> str:
         README = f.read()
     return README
 
-
-with open("requirements.txt", "r") as f:
-    reqs = [line.strip() for line in f]
+def reqs():
+    with open("requirements.txt", "r") as f:
+        reqs = [line.strip() for line in f]
+        return reqs
 
 
 setup(
-    name="pywhatkit",
-    packages=['pywhatkit'],
-    version="5.3",
+    name="AsyncPywhatKit",
+    packages=['AsyncPywhatKit'],
+    version="1.0.0.1",
     license="MIT",
-    description="PyWhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
-    author="Ankit Raj Mahapatra",
+    description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
+    author="SigireddyBalasai",
     author_email="sigireddybalasai@gmail.com",
-    url="https://github.com/Ankit404butfound/PyWhatKit",
-    download_url="https://github.com/Ankit404butfound/PyWhatKit/archive/refs/tags/5.2.zip",
-    keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial"],
-    install_requires=reqs,
+    url="https://github.com/SigireddyBalasai/PyWhatKit",
+    download_url="https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz",
+    keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial","async pywhatkit"],
+    install_requires=reqs(),
     package_data={"pywhatkit": ["py.typed"]},
     include_package_data=True,
     long_description=readme(),

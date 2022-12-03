@@ -1,4 +1,3 @@
-import time
 import webbrowser as web
 from platform import system
 from typing import Optional
