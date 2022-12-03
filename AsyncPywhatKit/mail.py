@@ -4,7 +4,7 @@ from email.message import EmailMessage
 from email.mime.text import MIMEText
 from typing import Union
 
-from pywhatkit import UnsupportedEmailProvider
+from .core.exceptions import UnsupportedEmailProvider
 
 
 async def send_mail(
