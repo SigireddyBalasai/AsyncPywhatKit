@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: AsyncPywhatKit
-Version: 1.0.0.1
+Version: 1.0.0.0.1
 Summary: AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features
 Home-page: https://github.com/SigireddyBalasai/PyWhatKit
 Download-URL: https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz
@@ -32,7 +32,7 @@ License-File: LICENSE
 <!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
-[PyWhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.
+[ASYNCPywhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.
 
 # Links
 
@@ -41,7 +41,7 @@ License-File: LICENSE
 
 ## Installation and Supported Versions
 
-PyWhatKit is available on PyPi:
+AsyncPywhatKit is available on PyPi:
 
 ```bash
 python3 -m pip install AsyncPywhatKit
