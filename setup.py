@@ -1,6 +1,5 @@
 from distutils.core import setup
 
-import setuptools
 
 
 def readme() -> str:
@@ -17,7 +16,7 @@ def reqs():
 setup(
     name="AsyncPywhatKit",
     packages=['AsyncPywhatKit'],
-    version="1.0.0.0.1",
+    version="1.0.0.0.21",
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",

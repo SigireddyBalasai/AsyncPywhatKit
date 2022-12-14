@@ -5,7 +5,7 @@ import aiohttp
 import asyncio
 import wikipedia
 
-from .core  import exceptions
+from AsyncPywhatKit.Core import exceptions
 
 if system().lower() in ("windows", "darwin"):
     from PIL import ImageGrab
@@ -15,7 +15,7 @@ if system().lower() in ("windows", "darwin"):
     ) -> None:
         """Take Screenshot of the Screen"""
 
-        asyncio.sleep(delay)
+        await asyncio.sleep(delay)
         screen = ImageGrab.grab()
         if show:
             screen.show(title=file_name)
@@ -37,10 +37,10 @@ async def show_history() -> None:
             print(content)
 
 
-async def info(topic: str, lines: int = 3, return_value: bool = False) -> Optional[str]:
+async def info(topic: str, lines: int = 3, return_value: bool = False):
     """Gives Information on the Topic"""
 
-    data = wikipedia.summary(topic, sentences=lines)
+    data = wikipedia.summary(topic, sentences=lines,autosuggest=False)
     print(data)
     if return_value:
         return data
@@ -65,7 +65,7 @@ async def playonyt(topic: str, use_api: bool = False, open_video: bool = True) -
         url = f"https://www.youtube.com/results?q={topic}"
         count = 0
         async with aiohttp.ClientSession() as session:
-            async with session.s.get(url) as cont:
+            async with session.get(url) as cont:
                 data = await cont.read()
                 data = str(data)
                 lst = data.split('"')

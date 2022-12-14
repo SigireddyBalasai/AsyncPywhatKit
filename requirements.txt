@@ -4,4 +4,5 @@ requests
 wikipedia
 aiohttp
 asyncio
+flask
 

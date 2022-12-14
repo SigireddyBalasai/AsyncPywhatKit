@@ -6,12 +6,15 @@ from typing import List
 from urllib.parse import quote
 import asyncio
 import pyautogui as pg
-
-from .core import log, core, exceptions
+import asyncio
+from AsyncPywhatKit.Core import core,log,exceptions
 
 pg.FAILSAFE = False
 
-core.check_connection()
+async def main():
+    await core.check_connection()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 
 
 async def sendwhatmsg_instantly(
@@ -41,7 +44,7 @@ async def sendwhatmsg_instantly(
         await core.close_tab(wait_time=close_time)
 
 
-def sendwhatmsg(
+async def sendwhatmsg(
     phone_no: str,
     message: str,
     time_hour: int,

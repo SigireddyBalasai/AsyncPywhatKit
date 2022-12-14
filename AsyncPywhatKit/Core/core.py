@@ -5,10 +5,10 @@ from platform import system
 from urllib.parse import quote
 from webbrowser import open
 
-import requests
+import aiohttp
 from pyautogui import click, hotkey, locateOnScreen, moveTo, press, size, typewrite
 
-from pywhatkit.sync.core.exceptions import InternetException
+from AsyncPywhatKit.Core.exceptions import InternetException
 
 WIDTH, HEIGHT = size()
 
@@ -39,12 +39,8 @@ async def findtextbox() -> None:
     location = locateOnScreen(f"{dir_path}\\data\\pywhatkit_smile1.png")
     try:
         moveTo(location[0] + 150, location[1] + 5)
-<<<<<<< HEAD:pywhatkit/core/core.py
         click()
-    except Exception:
-=======
     except:
->>>>>>> 11d9417 (added async friends test it):pywhatkit/async/core/core.py
         location = locateOnScreen(f"{dir_path}\\data\\pywhatkit_smile.png")
         moveTo(location[0] + 150, location[1] + 5)
         click()
@@ -54,8 +50,13 @@ async def check_connection() -> None:
     """Check the Internet connection of the Host Machine"""
 
     try:
-        requests.get("https://google.com")
-    except requests.RequestException:
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://google.com") as response:
+                status = response.status
+                if status < 400:
+                    pass
+
+    except :
         raise InternetException(
             "Error while connecting to the Internet. Make sure you are connected to the Internet!"
         )
@@ -77,17 +78,14 @@ async def _web(receiver: str, message: str) -> None:
 async def send_message(message: str, receiver: str, wait_time: int) -> None:
     """Parses and Sends the Message"""
 
-<<<<<<< HEAD:pywhatkit/core/core.py
-    _web(receiver=receiver, message=message)
-    time.sleep(7)
+    await _web(receiver=receiver, message=message)
+    await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2 + 15)
-    time.sleep(wait_time - 7)
-=======
+    await asyncio.sleep(wait_time - 7)
     await _web(receiver=receiver, message=message)
     await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2)
     await asyncio.sleep(wait_time - 7)
->>>>>>> 11d9417 (added async friends test it):pywhatkit/async/core/core.py
     if not check_number(number=receiver):
         for char in message:
             if char == "\n":
@@ -142,19 +140,16 @@ async def copy_image(path: str) -> None:
 async def send_image(path: str, caption: str, receiver: str, wait_time: int) -> None:
     """Sends the Image to a Contact or a Group based on the Receiver"""
 
-<<<<<<< HEAD:pywhatkit/core/core.py
-    _web(message=caption, receiver=receiver)
-    time.sleep(7)
+    await _web(message=caption, receiver=receiver)
+    await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2 + 15)
-    time.sleep(wait_time - 7)
-    copy_image(path=path)
-=======
+    await asyncio.sleep(wait_time - 7)
+    await copy_image(path=path)
     await _web(message=caption, receiver=receiver)
     await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2)
     await asyncio.sleep(wait_time - 7)
     await copy_image(path=path)
->>>>>>> 11d9417 (added async friends test it):pywhatkit/async/core/core.py
     if not check_number(number=receiver):
         for char in caption:
             if char == "\n":
