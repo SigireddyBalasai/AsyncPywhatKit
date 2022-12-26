@@ -8,7 +8,7 @@
 [![image](https://flat.badgen.net/github/license/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/LICENCE)
 [![image](https://flat.badgen.net/github/contributors/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/graphs/contributors)
 [![image](https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/releases)
-[![image]([https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit])]
+[![image](https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/releases)
 <!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
