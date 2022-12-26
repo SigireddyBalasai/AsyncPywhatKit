@@ -10,6 +10,10 @@
 [![image](https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/releases)
 ![image](https://img.shields.io/github/languages/count/SigireddyBalasai/AsyncPywhatKit)
 ![image](https://img.shields.io/github/languages/top/SigireddyBalasai/AsyncPywhatKit)
+<a href="https://scan.coverity.com/projects/sigireddybalasai-asyncpywhatkit">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/coverity/scan/27211.svg"/>
+</a>
 <!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
