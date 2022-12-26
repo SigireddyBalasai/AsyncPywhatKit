@@ -77,5 +77,5 @@ Be sure to read the [Guidelines](https://github.com/SigireddyBalasai/AsyncPywhat
 
 ## License
 
-MIT.
+Apache license 2.0
 For more information see [this](https://github.com/SigireddyBalasai/AsyncPywhatKit/blob/main/LICENSE)
