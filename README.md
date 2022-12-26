@@ -11,6 +11,7 @@
 ![image](https://img.shields.io/github/languages/count/SigireddyBalasai/AsyncPywhatKit)
 ![image](https://img.shields.io/github/languages/top/SigireddyBalasai/AsyncPywhatKit)
 ![image](https://img.shields.io/librariesio/release/pypi/AsyncPywhatKit)
+![image](https://img.shields.io/github/repo-size/SigireddyBalasai/AsyncPywhatKit)
 <a href="https://scan.coverity.com/projects/sigireddybalasai-asyncpywhatkit">
   <img alt="Coverity Scan Build Status"
        src="https://img.shields.io/coverity/scan/27211.svg"/>
