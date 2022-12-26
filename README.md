@@ -9,7 +9,7 @@
 [![image](https://flat.badgen.net/github/contributors/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/graphs/contributors)
 [![image](https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/releases)
 ![image](https://img.shields.io/github/languages/count/SigireddyBalasai/AsyncPywhatKit)
-![image]([https://img.shields.io/github/languages/count/SigireddyBalasai/AsyncPywhatKit](https://img.shields.io/github/languages/top/SigireddyBalasai/AsyncPywhatKit))
+![image](https://img.shields.io/github/languages/top/SigireddyBalasai/AsyncPywhatKit)
 <!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
