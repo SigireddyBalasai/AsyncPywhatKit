@@ -8,10 +8,18 @@
 [![image](https://flat.badgen.net/github/license/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/LICENCE)
 [![image](https://flat.badgen.net/github/contributors/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/graphs/contributors)
 [![image](https://flat.badgen.net/github/release/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/releases)
+![image](https://img.shields.io/github/languages/count/SigireddyBalasai/AsyncPywhatKit)
+![image](https://img.shields.io/github/languages/top/SigireddyBalasai/AsyncPywhatKit)
+![image](https://img.shields.io/librariesio/release/pypi/AsyncPywhatKit)
+![image](https://img.shields.io/github/repo-size/SigireddyBalasai/AsyncPywhatKit)
+<a href="https://scan.coverity.com/projects/sigireddybalasai-asyncpywhatkit">
+  <img alt="Coverity Scan Build Status"
+       src="https://img.shields.io/coverity/scan/27211.svg"/>
+</a>
 <!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
-[ASYNCPywhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.
+[AsyncPywhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.
 
 # Links
 
@@ -77,5 +85,5 @@ Be sure to read the [Guidelines](https://github.com/SigireddyBalasai/AsyncPywhat
 
 ## License
 
-MIT.
+Apache license 2.0
 For more information see [this](https://github.com/SigireddyBalasai/AsyncPywhatKit/blob/main/LICENSE)
