@@ -1,9 +1,12 @@
 import asyncio
 import os
 import pathlib
+import time
+import webbrowser
 from platform import system
 from urllib.parse import quote
 from webbrowser import open
+import time
 
 import aiohttp
 from pyautogui import click, hotkey, locateOnScreen, moveTo, press, size, typewrite
@@ -32,7 +35,16 @@ async def close_tab(wait_time: int = 2) -> None:
         raise Warning(f"{_system} not supported!")
     press("enter")
 
-
+def find_recent_chat():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    location = locateOnScreen(f"{dir_path}\\data\\searchbar.png")
+    try:
+        moveTo(location[0]+location[2]/2,location[1]+location[3])
+        click()
+    except:
+        location = locateOnScreen(f"{dir_path}\\data\\searchbar2.png")
+        moveTo(location[0]+location[2]/2,location[1]+location[3])
+        click()
 async def findtextbox() -> None:
     """click on text box"""
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -44,6 +56,31 @@ async def findtextbox() -> None:
         location = locateOnScreen(f"{dir_path}\\data\\pywhatkit_smile.png")
         moveTo(location[0] + 150, location[1] + 5)
         click()
+async def find_link():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    location = locateOnScreen(f"{dir_path}\\data\\link.png")
+    print(location)
+    try:
+        moveTo(location[0] + location[2]/2, location[1] + location[3]/2)
+        click()
+    except Exception:
+        location = locateOnScreen(f"{dir_path}\\data\\link2.png")
+        moveTo(location[0] + location[2]/2, location[1] + location[3]/2)
+        print(location)
+        click()
+async def find_document():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    location = locateOnScreen(f"{dir_path}\\data\\document.png")
+    print(location)
+    moveTo(location[0] + location[2]/2, location[1] + location[3]/2)
+    click()
+
+async def find_photo_or_video():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    location = locateOnScreen(f"{dir_path}\\data\\photo_or_video.png")
+    print(location)
+    moveTo(location[0] + location[2]/2, location[1] + location[3]/2)
+    click()
 
 
 async def check_connection() -> None:
@@ -165,3 +202,10 @@ async def send_image(path: str, caption: str, receiver: str, wait_time: int) -> 
     await asyncio.sleep(1)
     await findtextbox()
     press("enter")
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+location = locateOnScreen(f"{dir_path}\\data\\link2.png")
+print(location)
+moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+webbrowser.open("https://web.whatsapp.com/")
+time.sleep(10)

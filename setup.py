@@ -1,14 +1,14 @@
 from distutils.core import setup
 
 
-
 def readme() -> str:
     with open(r"README.md") as f:
         README = f.read()
     return README
 
+
 def reqs():
-    with open("requirements.txt", "r") as f:
+    with open("C:\\Users\\sigir\\AsyncPywhatKit\\requirements.txt", "r") as f:
         reqs = [line.strip() for line in f]
         return reqs
 
@@ -16,14 +16,14 @@ def reqs():
 setup(
     name="AsyncPywhatKit",
     packages=['AsyncPywhatKit'],
-    version="1.0.0.0.21",
+    version="1.1.0.0.0",
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",
     author_email="sigireddybalasai@gmail.com",
     url="https://github.com/SigireddyBalasai/PyWhatKit",
     download_url="https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz",
-    keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial","async pywhatkit"],
+    keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial", "async pywhatkit"],
     install_requires=reqs(),
     package_data={"pywhatkit": ["py.typed"]},
     include_package_data=True,

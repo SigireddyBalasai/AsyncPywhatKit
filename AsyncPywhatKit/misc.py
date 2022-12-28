@@ -40,10 +40,11 @@ async def show_history() -> None:
 async def info(topic: str, lines: int = 3, return_value: bool = False):
     """Gives Information on the Topic"""
 
-    data = wikipedia.summary(topic, sentences=lines,autosuggest=False)
-    print(data)
+    data = wikipedia.page(topic,auto_suggest=False)
+    dataa = data.content
+    print(dataa)
     if return_value:
-        return data
+        return dataa
 
 
 async def playonyt(topic: str, use_api: bool = False, open_video: bool = True) -> str:

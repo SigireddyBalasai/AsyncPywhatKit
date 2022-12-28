@@ -4,61 +4,65 @@ from datetime import datetime
 from re import fullmatch
 from typing import List
 from urllib.parse import quote
+import pyperclip
+import keyboard
 import asyncio
 import pyautogui as pg
 import asyncio
-from AsyncPywhatKit.Core import core,log,exceptions
+import os
+from AsyncPywhatKit.Core import core, log, exceptions
 
 pg.FAILSAFE = False
 
+
 async def main():
     await core.check_connection()
+
+
+
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 
 
 async def sendwhatmsg_instantly(
-    phone_no: str,
-    message: str,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        message: str,
+        phone_no: str,
+        wait_time: int = 15,
+        tab_close: bool = True,
+        close_time: int = 3
 ) -> None:
-    """Send WhatsApp Message Instantly"""
-
-    if not core.check_number(number=phone_no):
+    print(phone_no)
+    """Send a whatsapp Message Instantly"""
+    if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
-
     phone_no = phone_no.replace(" ", "")
-    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{10}$", phone_no):
+    print(phone_no)
+    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
         raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
-
-    web.open(f"https://web.whatsapp.com/send?phone={phone_no}&text={quote(message)}")
-    await asyncio.sleep(4)
-    pg.click(core.WIDTH / 2, core.HEIGHT / 2)
-    await asyncio.sleep(wait_time - 4)
-    await core.findtextbox()
-    pg.press("enter")
-    await log.log_message(_time=time.localtime(), receiver=phone_no, message=message)
+    phone_no = phone_no.replace(" ", "")
+    web.open(f"https://web.whatsapp.com/send?phone={phone_no}&text={quote(message)}", new=0)
+    await asyncio.sleep(wait_time)
+    pg.press('enter')
+    await asyncio.sleep(close_time)
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
 
 async def sendwhatmsg(
-    phone_no: str,
-    message: str,
-    time_hour: int,
-    time_min: int,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        phone_no: str,
+        message: str,
+        time_hour: int,
+        time_min: int,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
 ) -> None:
     """Send a WhatsApp Message at a Certain Time"""
     if not core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
     phone_no = phone_no.replace(" ", "")
-    if not fullmatch(r"^\+?[0-9]{2,4}[0-9]{10}$", phone_no):
+    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
         raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
 
     if time_hour not in range(25) or time_min not in range(60):
@@ -82,20 +86,19 @@ async def sendwhatmsg(
         f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
     )
     await asyncio.sleep(sleep_time)
-    await core.send_message(message=message, receiver=phone_no, wait_time=wait_time)
-    await log.log_message(_time=current_time, receiver=phone_no, message=message)
+    await sendwhatmsg_instantly(message,phone_no)
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
 
 async def sendwhatmsg_to_group(
-    group_id: str,
-    message: str,
-    time_hour: int,
-    time_min: int,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        group_id: str,
+        message: str,
+        time_hour: int,
+        time_min: int,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
 ) -> None:
     """Send WhatsApp Message to a Group at a Certain Time"""
 
@@ -120,24 +123,24 @@ async def sendwhatmsg_to_group(
         f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
     )
     await asyncio.sleep(sleep_time)
-    await core.send_message(message=message, receiver=group_id, wait_time=wait_time)
+    await sendwhatmsg_instantly(group_id, message)
     await log.log_message(_time=current_time, receiver=group_id, message=message)
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
 
 async def sendwhatmsg_to_group_instantly(
-    group_id: str,
-    message: str,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        group_id: str,
+        message: str,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
 ) -> None:
     """Send WhatsApp Message to a Group Instantly"""
 
     current_time = time.localtime()
     await asyncio.sleep(4)
-    await core.send_message(message=message, receiver=group_id, wait_time=wait_time)
+    await sendwhatmsg_instantly(group_id, message)
     await log.log_message(_time=current_time, receiver=group_id, message=message)
 
     if tab_close:
@@ -145,13 +148,13 @@ async def sendwhatmsg_to_group_instantly(
 
 
 async def sendwhatsmsg_to_all(
-    phone_nos: List[str],
-    message: str,
-    time_hour: int,
-    time_min: int,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        phone_nos: List[str],
+        message: str,
+        time_hour: int,
+        time_min: int,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
 ):
     for phone_no in phone_nos:
         await sendwhatmsg(
@@ -159,49 +162,85 @@ async def sendwhatsmsg_to_all(
         )
 
 
-async def sendwhats_image(
-    receiver: str,
-    img_path: str,
-    time_hour: int,
-    time_min: int,
-    caption: str = "",
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
-) -> None:
-    """Send Image to a WhatsApp Contact or Group at a Certain Time"""
 
-    if (not receiver.isalnum()) and (not core.check_number(number=receiver)):
+async def sendimg_or_video_immediately(
+        phone_no: str,
+        path: str,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
+) -> None:
+    """Send WhatsApp Message Instantly"""
+
+    if not core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
-    current_time = time.localtime()
-    left_time = datetime.strptime(
-        f"{time_hour}:{time_min}:0", "%H:%M:%S"
-    ) - datetime.strptime(
-        f"{current_time.tm_hour}:{current_time.tm_min}:{current_time.tm_sec}",
-        "%H:%M:%S",
-    )
+    phone_no = phone_no.replace(" ", "")
+    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
+        raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
 
-    if left_time.seconds < wait_time:
-        raise exceptions.CallTimeException(
-            "Call Time must be Greater than Wait Time as WhatsApp Web takes some Time to Load!"
-        )
+    web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    time.sleep(wait_time)
+    await core.find_link()
+    time.sleep(1)
+    await core.find_photo_or_video()
 
-    sleep_time = left_time.seconds - wait_time
-    print(
-        f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Image will be Delivered!"
-    )
-    await asyncio.sleep(sleep_time)
-    await core.send_image(
+    pyperclip.copy(os.path.abspath(path))
+    print("Copied")
+    time.sleep(1)
+    keyboard.press("ctrl")
+    keyboard.press("v")
+    keyboard.release("v")
+    keyboard.release("ctrl")
+    time.sleep(1)
+    keyboard.press("enter")
+    keyboard.release("enter")
+    time.sleep(1)
+    keyboard.press("enter")
+    keyboard.release("enter")
+    if tab_close:
+        await core.close_tab(wait_time=close_time)
 
-        path=img_path, caption=caption, receiver=receiver, wait_time=wait_time
-    )
-    await log.log_image(_time=current_time, path=img_path, receiver=receiver, caption=caption)
+async def sendwhatdoc_immediately(
+        phone_no: str,
+        path: str,
+        wait_time: int = 15,
+        tab_close: bool = True,
+        close_time: int = 3,
+) -> None:
+    """Send WhatsApp Message Instantly"""
+
+    if not core.check_number(number=phone_no):
+        raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
+
+    phone_no = phone_no.replace(" ", "")
+    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
+        raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
+
+    web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    time.sleep(wait_time)
+    await core.find_link()
+    time.sleep(1)
+    await core.find_document()
+    pyperclip.copy(os.path.abspath(path))
+    print("Copied")
+    time.sleep(1)
+    keyboard.press("ctrl")
+    keyboard.press("v")
+    keyboard.release("v")
+    keyboard.release("ctrl")
+    time.sleep(1)
+    keyboard.press("enter")
+    keyboard.release("enter")
+    time.sleep(1)
+    keyboard.press("enter")
+    keyboard.release("enter")
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
 
-async def open_web() -> bool:
+
+def open_web() -> bool:
     """Opens WhatsApp Web"""
 
     try:

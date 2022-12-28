@@ -5,3 +5,6 @@ wikipedia
 aiohttp
 asyncio
 flask
+paperclip
+keyboard
+pyperclip

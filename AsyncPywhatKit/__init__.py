@@ -11,7 +11,9 @@ from AsyncPywhatKit.whats import (
     sendwhatmsg_instantly,
     sendwhatmsg_to_group,
     sendwhatmsg_to_group_instantly,
-    sendwhats_image,
+    sendimg_or_video_immediately,
+    sendwhatsmsg_to_all,
+    sendwhatdoc_immediately
 )
 
 _system = system().lower()
