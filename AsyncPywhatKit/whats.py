@@ -6,6 +6,7 @@ from typing import List
 from urllib.parse import quote
 import pyperclip
 import keyboard
+import pathlib
 import asyncio
 import pyautogui as pg
 import asyncio
@@ -172,7 +173,7 @@ async def sendimg_or_video_immediately(
 ) -> None:
     """Send WhatsApp Message Instantly"""
 
-    if not core.check_number(number=phone_no):
+    if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
     phone_no = phone_no.replace(" ", "")
@@ -184,9 +185,18 @@ async def sendimg_or_video_immediately(
     await core.find_link()
     time.sleep(1)
     await core.find_photo_or_video()
+    if type(path) == str:
+        path = pathlib.Path(path)
+        pyperclip.copy(str(path.resolve()))
+        print("Copied")
+    else:
+        strn = []
+        for paths in path:
+            patha = str(pathlib.Path(paths).resolve())
+            strn.append(f'"{patha}"')
 
-    pyperclip.copy(os.path.abspath(path))
-    print("Copied")
+        print(" ".join(strn))
+        pyperclip.copy(" ".join(strn))
     time.sleep(1)
     keyboard.press("ctrl")
     keyboard.press("v")
@@ -201,7 +211,7 @@ async def sendimg_or_video_immediately(
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
-async def sendwhatdoc_immediately(
+async def sendwhatsdoc_immediately(
         phone_no: str,
         path: str,
         wait_time: int = 15,
@@ -210,7 +220,7 @@ async def sendwhatdoc_immediately(
 ) -> None:
     """Send WhatsApp Message Instantly"""
 
-    if not core.check_number(number=phone_no):
+    if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
     phone_no = phone_no.replace(" ", "")
@@ -222,8 +232,19 @@ async def sendwhatdoc_immediately(
     await core.find_link()
     time.sleep(1)
     await core.find_document()
-    pyperclip.copy(os.path.abspath(path))
-    print("Copied")
+    if type(path) == str:
+        path = pathlib.Path(path)
+        pyperclip.copy(str(path.resolve()))
+        print("Copied")
+    else:
+        strn = []
+        for paths in path:
+            patha = str(pathlib.Path(paths).resolve())
+            strn.append(f'"{patha}"')
+
+        print(" ".join(strn))
+        pyperclip.copy(" ".join(strn))
+
     time.sleep(1)
     keyboard.press("ctrl")
     keyboard.press("v")

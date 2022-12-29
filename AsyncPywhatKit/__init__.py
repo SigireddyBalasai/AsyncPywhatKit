@@ -5,6 +5,7 @@ from AsyncPywhatKit.handwriting import text_to_handwriting
 from AsyncPywhatKit.mail import send_hmail, send_mail
 from AsyncPywhatKit.misc import info, playonyt, search, show_history, take_screenshot
 from AsyncPywhatKit.sc import cancel_shutdown, shutdown
+from AsyncPywhatKit.Core import core
 from AsyncPywhatKit.whats import (
     open_web,
     sendwhatmsg,
@@ -13,7 +14,7 @@ from AsyncPywhatKit.whats import (
     sendwhatmsg_to_group_instantly,
     sendimg_or_video_immediately,
     sendwhatsmsg_to_all,
-    sendwhatdoc_immediately
+    sendwhatsdoc_immediately
 )
 
 _system = system().lower()
