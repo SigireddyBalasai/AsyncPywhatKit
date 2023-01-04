@@ -131,8 +131,22 @@ async def sendwhatmsg_to_group(
         tab_close: bool = False,
         close_time: int = 3,
 ) -> None:
-    """Send WhatsApp Message to a Group at a Certain Time"""
-
+    """Send a WhatsApp message to a group at a certain time.
+    
+    This function schedules the sending of a WhatsApp message to a specified group at a specified time.
+    
+    Parameters:
+    group_id: The ID of the group to send the message to.
+    message: The message to be sent.
+    time_hour: The hour at which to send the message (in 24-hour format).
+    time_min: The minute at which to send the message.
+    wait_time: The time to wait before sending the message (in seconds).
+    tab_close: A flag indicating whether to close the tab after sending the message.
+    close_time: The time to wait before closing the tab (in seconds).
+    
+    Returns:
+    None.
+    """
     if time_hour not in range(25) or time_min not in range(60):
         raise Warning("Invalid Time Format!")
 
@@ -167,8 +181,20 @@ async def sendwhatmsg_to_group_instantly(
         tab_close: bool = False,
         close_time: int = 3,
 ) -> None:
-    """Send WhatsApp Message to a Group Instantly"""
-
+    """Send a WhatsApp message to a group instantly.
+    
+    This function opens the WhatsApp Web page in a new tab and sends a message to the specified group.
+    
+    Parameters:
+    group_id: The ID of the group to send the message to.
+    message: The message to be sent.
+    wait_time: The time to wait before sending the message (in seconds).
+    tab_close: A flag indicating whether to close the tab after sending the message.
+    close_time: The time to wait before closing the tab (in seconds).
+    
+    Returns:
+    None.
+    """
     current_time = time.localtime()
     await asyncio.sleep(4)
     await sendwhatmsg_instantly(group_id, message)
@@ -176,7 +202,6 @@ async def sendwhatmsg_to_group_instantly(
 
     if tab_close:
         await core.close_tab(wait_time=close_time)
-
 
 async def sendwhatsmsg_to_all(
         phone_nos: List[str],
