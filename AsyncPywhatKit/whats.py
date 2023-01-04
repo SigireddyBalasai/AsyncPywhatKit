@@ -242,7 +242,20 @@ async def sendimg_or_video_immediately(
         tab_close: bool = False,
         close_time: int = 3,
 ) -> None:
-    """Send WhatsApp Message Instantly"""
+        """Send an image or video file via WhatsApp instantly.
+    
+    This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends an image or video file to the specified phone number.
+    
+    Parameters:
+    phone_no: The phone number to send the file to.
+    path: The file path of the image or video file to be sent.
+    wait_time: The time to wait before sending the file (in seconds).
+    tab_close: A flag indicating whether to close the tab after sending the file.
+    close_time: The time to wait before closing the tab (in seconds).
+    
+    Returns:
+    None.
+    """
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
