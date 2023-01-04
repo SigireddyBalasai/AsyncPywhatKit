@@ -359,7 +359,7 @@ None.
 
 
 def open_web() -> bool:
-    """Opens WhatsApp Web"""
+    """Opens WhatsApp Web """
 
     try:
         web.open("https://web.whatsapp.com")
