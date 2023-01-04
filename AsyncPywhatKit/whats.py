@@ -63,15 +63,30 @@ async def sendwhatmsg_instantly(
 
 
 async def sendwhatmsg(
-        phone_no: str,
-        message: str,
-        time_hour: int,
-        time_min: int,
-        wait_time: int = 15,
-        tab_close: bool = False,
-        close_time: int = 3,
+    phone_no: str,
+    message: str,
+    time_hour: int,
+    time_min: int,
+    wait_time: int = 15,
+    tab_close: bool = False,
+    close_time: int = 3,
 ) -> None:
-    """Send a WhatsApp Message at a Certain Time"""
+    """Send a WhatsApp message at a certain time.
+    
+    This function schedules the sending of a WhatsApp message to a specified phone number at a specified time.
+    
+    Parameters:
+    phone_no: The phone number to send the message to.
+    message: The message to be sent.
+    time_hour: The hour at which to send the message (in 24-hour format).
+    time_min: The minute at which to send the message.
+    wait_time: The time to wait before sending the message (in seconds).
+    tab_close: A flag indicating whether to close the tab after sending the message.
+    close_time: The time to wait before closing the tab (in seconds).
+    
+    Returns:
+    None.
+    """
     if not core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
 
