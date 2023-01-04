@@ -32,8 +32,21 @@ async def sendwhatmsg_instantly(
         tab_close: bool = True,
         close_time: int = 3
 ) -> None:
+    """Send a WhatsApp message instantly.
+    
+    This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends a message to the specified phone number.
+    
+    Parameters:
+    message: The message to be sent.
+    phone_no: The phone number to send the message to.
+    wait_time: The time to wait before sending the message (in seconds).
+    tab_close: A flag indicating whether to close the tab after sending the message.
+    close_time: The time to wait before closing the tab (in seconds).
+    
+    Returns:
+    None.
+    """
     print(phone_no)
-    """Send a whatsapp Message Instantly"""
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
     phone_no = phone_no.replace(" ", "")
