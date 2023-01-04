@@ -302,7 +302,20 @@ async def sendwhatsdoc_immediately(
         tab_close: bool = True,
         close_time: int = 3,
 ) -> None:
-    """Send WhatsApp Message Instantly"""
+    """Send a WhatsApp document instantly.
+
+This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends a document to the specified phone number.
+
+Parameters:
+phone_no: The phone number to send the document to.
+path: The file path of the document to be sent.
+wait_time: The time to wait before sending the document (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the document.
+close_time: The time to wait before closing the tab (in seconds).
+
+Returns:
+None.
+"""
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
