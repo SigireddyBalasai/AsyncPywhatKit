@@ -17,6 +17,7 @@ pg.FAILSAFE = False
 
 
 async def main():
+    """Check the internet connection."""
     await core.check_connection()
 
 
@@ -60,6 +61,7 @@ async def sendwhatmsg_instantly(
     await asyncio.sleep(close_time)
     if tab_close:
         await core.close_tab(wait_time=close_time)
+
 
 
 async def sendwhatmsg(
