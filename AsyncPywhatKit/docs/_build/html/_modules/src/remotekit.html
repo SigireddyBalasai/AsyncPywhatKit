@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.remotekit &mdash; AsyncPywhatKit 1.1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AsyncPywhatKit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AsyncPywhatKit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">src.remotekit</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for src.remotekit</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">import</span> <span class="nn">pyautogui</span> <span class="k">as</span> <span class="nn">p</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;werkzeug&quot;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+
+<span class="n">cli</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s2">&quot;flask.cli&quot;</span><span class="p">]</span>
+<span class="n">cli</span><span class="o">.</span><span class="n">show_server_banner</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="kc">None</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="s2">&quot;app&quot;</span><span class="p">)</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">FAILSAFE</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">moving</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">drag</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">type_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">old_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lastcords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lstmcord</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">lstlen</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+
+
+<div class="viewcode-block" id="send"><a class="viewcode-back" href="../../src.html#src.remotekit.send">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">send</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># print(&quot;here&quot;)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+        <span class="c1"># print(request.get_json())</span>
+        <span class="k">return</span> <span class="s2">&quot;ok&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span>
+<span class="s2">&lt;html&gt;</span>
+<span class="s2">  &lt;head&gt;</span>
+<span class="s2">    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=utf-8&quot;/&gt;</span>
+<span class="s2">    &lt;meta name=&#39;viewport&#39;</span>
+<span class="s2">     content=&#39;width=device-width, initial-scale=1.0, maximum-scale=1.0,</span>
+<span class="s2">     user-scalable=0&#39; &gt;</span>
+<span class="s2">    &lt;script type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;</span>
+<span class="s2">    function init() {</span>
+<span class="s2">        var touchzone = document.getElementById(&quot;zone&quot;);</span>
+<span class="s2">        touchzone.addEventListener(&quot;touchend&quot;, clicke, false);</span>
+<span class="s2">        touchzone.addEventListener(&quot;touchmove&quot;, handle, false);</span>
+<span class="s2">        touchzone.addEventListener(&quot;touchstart&quot;, tostart, false);</span>
+<span class="s2">        var scrollzone = document.getElementById(&quot;scroll&quot;);</span>
+<span class="s2">        scrollzone.addEventListener(&quot;touchmove&quot;, scrollmove, false);</span>
+<span class="s2">        scrollzone.addEventListener(&quot;touchstart&quot;, tostart, false);</span>
+<span class="s2">    }</span>
+
+<span class="s2">function scrollmove(event){</span>
+<span class="s2">  var a    = event.touches[0].pageX;</span>
+<span class="s2">  var b     = event.touches[0].pageY;</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;scroller&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;a=&quot;+a+&quot;&amp;b=&quot;+b);</span>
+<span class="s2">}</span>
+
+
+<span class="s2">function tostart(event){</span>
+<span class="s2">  var a    = event.touches[0].pageX;</span>
+<span class="s2">  var b     = event.touches[0].pageY;</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;tstart&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;a=&quot;+a+&quot;&amp;b=&quot;+b);</span>
+<span class="s2">}</span>
+
+<span class="s2">function clicke(event) {</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  var a = event.changedTouches[0].pageY;</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;click&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;a=&quot;+a);</span>
+<span class="s2">}</span>
+
+<span class="s2">function dragm() {</span>
+<span class="s2">    var btn = document.getElementById(&quot;drag&quot;);</span>
+<span class="s2">    var xhttp = new XMLHttpRequest();</span>
+<span class="s2">    xhttp.onreadystatechange = function() {</span>
+<span class="s2">    };</span>
+<span class="s2">    xhttp.open(&quot;POST&quot;, &quot;dradhandler&quot;, true);</span>
+<span class="s2">    xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">    xhttp.send();</span>
+
+<span class="s2">    if (btn.innerHTML == &quot;Drag mouse&quot;){</span>
+<span class="s2">        btn.innerHTML = &quot;Move mouse&quot;;</span>
+<span class="s2">    }</span>
+<span class="s2">    else{</span>
+<span class="s2">        btn.innerHTML = &quot;Drag mouse&quot;;</span>
+<span class="s2">    }</span>
+<span class="s2">}</span>
+
+<span class="s2">function sendData(a,b,g) {</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;handler&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;a=&quot;+a+&quot;&amp;b=&quot;+b);</span>
+<span class="s2">}</span>
+
+
+<span class="s2"> function handle(event) {</span>
+<span class="s2">  var alpha    = event.touches[0].pageX;</span>
+<span class="s2">  var beta     = event.touches[0].pageY;</span>
+<span class="s2">  sendData(alpha,beta);</span>
+<span class="s2">}</span>
+
+
+<span class="s2">function on_input(){</span>
+<span class="s2">  var data = document.getElementById(&quot;inpfield&quot;).value;</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;typed&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;data=&quot;+data);</span>
+<span class="s2">}</span>
+<span class="s2">function enter_but(){</span>
+<span class="s2">  var xhttp = new XMLHttpRequest();</span>
+<span class="s2">  xhttp.onreadystatechange = function() {</span>
+<span class="s2">  };</span>
+<span class="s2">  xhttp.open(&quot;POST&quot;, &quot;enter&quot;, true);</span>
+<span class="s2">  xhttp.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);</span>
+<span class="s2">  xhttp.send(&quot;data=&quot;+&quot;data&quot;);</span>
+<span class="s2">}</span>
+
+
+
+
+<span class="s2">    &lt;/script&gt;</span>
+
+<span class="s2">    &lt;meta name=&quot;&quot; content=&quot;&quot;&gt;</span>
+<span class="s2">    &lt;title&gt;&lt;/title&gt;</span>
+<span class="s2">  &lt;style&gt;</span>
+<span class="s2">  .center{</span>
+<span class="s2">    position: fixed;</span>
+<span class="s2">    background-color: rgb(230,230,230);</span>
+<span class="s2">    width:80%;</span>
+<span class="s2">    height:400px;</span>
+<span class="s2">    top:300px;</span>
+<span class="s2">    left:46%;</span>
+<span class="s2">    color:rgb(200,200,200);</span>
+<span class="s2">    font-weight:bold;</span>
+<span class="s2">    transform: translate(-50%,-50%);</span>
+<span class="s2">    -webkit-touch-callout: none;</span>
+<span class="s2">    -webkit-user-select: none;</span>
+<span class="s2">    -khtml-user-select: none;</span>
+<span class="s2">    -moz-user-select: none;</span>
+<span class="s2">    -ms-user-select: none;</span>
+<span class="s2">    user-select: none;</span>
+<span class="s2">   }</span>
+<span class="s2">   html{</span>
+<span class="s2">   touch-action:pan-down</span>
+<span class="s2">   }</span>
+
+<span class="s2">   .scrollarea{</span>
+<span class="s2">    position: fixed;</span>
+<span class="s2">    background-color: rgb(230,230,230);</span>
+<span class="s2">    width:30px;</span>
+<span class="s2">    height:400px;</span>
+<span class="s2">    top:300px;</span>
+<span class="s2">    left:92.05%;</span>
+<span class="s2">    color:rgb(200,200,200);</span>
+<span class="s2">    font-weight:bold;</span>
+<span class="s2">    transform: translate(-50%,-50%);</span>
+<span class="s2">    -webkit-touch-callout: none;</span>
+<span class="s2">    -webkit-user-select: none;</span>
+<span class="s2">    -khtml-user-select: none;</span>
+<span class="s2">    -moz-user-select: none;</span>
+<span class="s2">    -ms-user-select: none;</span>
+<span class="s2">    user-select: none;</span>
+<span class="s2">    text-align:center;</span>
+<span class="s2">   }</span>
+
+
+<span class="s2">  &lt;/style&gt;</span>
+<span class="s2">  &lt;/head&gt;</span>
+<span class="s2">  &lt;body onload=&quot;init()&quot;&gt;</span>
+<span class="s2">  &lt;p style=&quot;text-align:center;&quot;&gt;Type on PC</span>
+<span class="s2">  &lt;input id=&quot;inpfield&quot;type=&quot;text&quot; oninput=on_input()&gt;&lt;/input&gt;</span>
+<span class="s2">  &lt;button type=&quot;button&quot; onclick=&quot;enter_but()&quot;&gt;Enter&lt;/button&gt;&lt;/p&gt;</span>
+<span class="s2">  &lt;div style=&quot;text-align:center;&quot;&gt;</span>
+<span class="s2">      &lt;button id=&quot;drag&quot; type=&quot;button&quot; onclick=&quot;dragm()&quot;&gt;Drag mouse&lt;/button&gt;</span>
+<span class="s2">  &lt;/div&gt;</span>
+<span class="s2">    &lt;div class=&quot;center&quot; id=&quot;zone&quot;&gt;</span>
+<span class="s2">        &lt;p align=&quot;center&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;Left click area&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;hr&gt;&lt;/p&gt;</span>
+<span class="s2">        &lt;p align=&quot;center&quot;&gt;&lt;br&gt;Right click area&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">    &lt;div class=&quot;scrollarea&quot; id=&quot;scroll&quot;&gt;</span>
+<span class="s2">       &lt;p&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;S&lt;br&gt;C&lt;br&gt;R&lt;br&gt;O&lt;br&gt;L&lt;br&gt;L&lt;/p&gt;</span>
+<span class="s2">    &lt;/div&gt;</span>
+<span class="s2">  &lt;/body&gt;</span>
+<span class="s2">&lt;/html&gt;&quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="handle"><a class="viewcode-back" href="../../src.html#src.remotekit.handle">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/handler&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">handle</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">moving</span><span class="p">,</span> <span class="n">cordlst</span><span class="p">,</span> <span class="n">lastcords</span>
+    <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">moving</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">lx</span><span class="p">,</span> <span class="n">ly</span> <span class="o">=</span> <span class="n">lastcords</span>
+    <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="n">coords</span>
+    <span class="c1"># print(cx,cy)</span>
+    <span class="c1"># p.moveRel((cx-lx)/2,(cy-ly)/2)</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">moveRel</span><span class="p">((</span><span class="n">cx</span> <span class="o">-</span> <span class="n">lx</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">cy</span> <span class="o">-</span> <span class="n">ly</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">lastcords</span> <span class="o">=</span> <span class="n">coords</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="scrollerr"><a class="viewcode-back" href="../../src.html#src.remotekit.scrollerr">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/scroller&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">scrollerr</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">moving</span><span class="p">,</span> <span class="n">cordlst</span><span class="p">,</span> <span class="n">lastcords2</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">lx</span><span class="p">,</span> <span class="n">ly</span> <span class="o">=</span> <span class="n">lastcords2</span>
+    <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span> <span class="o">=</span> <span class="n">coords</span>
+    <span class="k">if</span> <span class="n">cy</span> <span class="o">&lt;</span> <span class="n">ly</span><span class="p">:</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">cy</span> <span class="o">&gt;</span> <span class="n">ly</span><span class="p">:</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">lastcords2</span> <span class="o">=</span> <span class="n">coords</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="startt"><a class="viewcode-back" href="../../src.html#src.remotekit.startt">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/tstart&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">startt</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">lastcords</span><span class="p">,</span> <span class="n">lastcords2</span>
+    <span class="c1"># print(&quot;end&quot;)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+    <span class="c1"># print(a,b)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">lastcords</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">lastcords2</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="do_click"><a class="viewcode-back" href="../../src.html#src.remotekit.do_click">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/click&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">do_click</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">moving</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">moving</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
+        <span class="c1"># print(a)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">:</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">rightClick</span><span class="p">()</span>
+
+    <span class="n">moving</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="typeit"><a class="viewcode-back" href="../../src.html#src.remotekit.typeit">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/typed&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">typeit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">type_data</span><span class="p">,</span> <span class="n">old_data</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+    <span class="n">type_data</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_data</span><span class="p">):</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">typewrite</span><span class="p">(</span><span class="n">type_data</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">type_data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s2">&quot;backspace&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">old_data</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_data</span><span class="p">))</span>
+    <span class="n">old_data</span> <span class="o">=</span> <span class="n">type_data</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="slashN"><a class="viewcode-back" href="../../src.html#src.remotekit.slashN">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/enter&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">slashN</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">press</span><span class="p">(</span><span class="s2">&quot;enter&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="ghasit_mouse"><a class="viewcode-back" href="../../src.html#src.remotekit.ghasit_mouse">[docs]</a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/dradhandler&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">ghasit_mouse</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">drag</span>
+    <span class="c1"># print(drag)</span>
+    <span class="k">if</span> <span class="n">drag</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">mouseUp</span><span class="p">()</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">drag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">mouseDown</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="s2">&quot;1&quot;</span></div>
+
+
+<div class="viewcode-block" id="start_server"><a class="viewcode-back" href="../../src.html#src.remotekit.start_server">[docs]</a><span class="k">def</span> <span class="nf">start_server</span><span class="p">(</span><span class="n">port</span><span class="o">=</span><span class="mi">8000</span><span class="p">,</span> <span class="n">print_msg</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">print_msg</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Server started at local_ip_of_this_pc:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">port</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Print Ctrl+C to exit&quot;</span><span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span></div>
+
+
+<span class="c1"># app.run(host=&#39;0.0.0.0&#39;)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># def main():</span>
+<span class="c1">#     app.run(host=&quot;192.168.43.17&quot;, port=33)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># if __name__ == &quot;__main__&quot;:</span>
+<span class="c1">#     main()</span>
+<span class="c1">#     app.run(host=&#39;localhost&#39;)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Sigireddy Balasai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

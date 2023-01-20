@@ -1,11 +1,10 @@
 import webbrowser as web
 from platform import system
-from typing import Optional
 import aiohttp
 import asyncio
 import wikipedia
 
-from AsyncPywhatKit.Core import exceptions
+from .Core import exceptions
 
 if system().lower() in ("windows", "darwin"):
     from PIL import ImageGrab

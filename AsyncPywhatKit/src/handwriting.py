@@ -1,6 +1,6 @@
 import aiohttp
 
-from AsyncPywhatKit.Core import exceptions
+from .Core import exceptions
 
 
 async def text_to_handwriting(

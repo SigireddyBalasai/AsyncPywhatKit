@@ -7,11 +7,9 @@ from urllib.parse import quote
 import pyperclip
 import keyboard
 import pathlib
-import asyncio
 import pyautogui as pg
 import asyncio
-import os
-from AsyncPywhatKit.Core import core, log, exceptions
+from .Core import core, log, exceptions
 
 pg.FAILSAFE = False
 
@@ -65,10 +63,10 @@ async def sendwhatmsg_instantly(
 
 
 async def sendwhatmsg(
-    phone_no: str,
-    message: str,
-    time_hour: int,
-    time_min: int,
+    phone_no: str = None,
+    message: str = None,
+    time_hour: int = None,
+    time_min: int = None,
     wait_time: int = 15,
     tab_close: bool = False,
     close_time: int = 3,
@@ -228,9 +226,9 @@ async def sendwhatsmsg_to_all(
     Returns:
     None.
     """
-    for phone_no in phone_nos:
+    for phone_n in phone_nos:
         await sendwhatmsg(
-            phone_no, message, time_hour, time_min, wait_time, tab_close, close_time
+            phone_n, message, time_hour, time_min, wait_time, tab_close, close_time
         )
 
 
@@ -242,7 +240,7 @@ async def sendimg_or_video_immediately(
         tab_close: bool = False,
         close_time: int = 3,
 ) -> None:
-        """Send an image or video file via WhatsApp instantly.
+    """Send an image or video file via WhatsApp instantly.
     
     This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends an image or video file to the specified phone number.
     

@@ -1,24 +1,19 @@
 import asyncio
 import os
-import pathlib
-import time
-import webbrowser
 from platform import system
 from urllib.parse import quote
 from webbrowser import open
-import time
 
 import aiohttp
-import pyautogui
-from pyautogui import click, hotkey, locateOnScreen, moveTo, press, size, typewrite, screenshot
+from pyautogui import click, hotkey, locateOnScreen, moveTo, press, size, typewrite
 
-from AsyncPywhatKit.Core.exceptions import InternetException
+from .exceptions import InternetException
 
 WIDTH, HEIGHT = size()
 
 
 async def check_number(number: str) -> bool:
-    """Checks the Number to see if contains the Country Code"""
+    """Checks if the Number is Valid or not"""
 
     return "+" in number or "_" in number
 

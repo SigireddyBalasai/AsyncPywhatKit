@@ -1,8 +1,7 @@
 import os
 import time
-import asyncio
 
-from AsyncPywhatKit.Core.core import check_number
+from .core import check_number
 
 
 async def format_message(message: str) -> str:
