@@ -1,6 +1,6 @@
 import asyncio
 import os
-from AsyncPywhatKit import sendimg_or_video_immediately
+from AsyncPywhatKit.src import sendimg_or_video_immediately
 
 print(os.path.abspath("/Core/data/document.png"))
 

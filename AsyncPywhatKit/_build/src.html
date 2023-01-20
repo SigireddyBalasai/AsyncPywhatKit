@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src package &mdash; AsyncPywhatKit 1.1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> AsyncPywhatKit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">src package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-src.ascii_art">src.ascii_art module</a><ul>
+<li><a class="reference internal" href="#src.ascii_art.image_to_ascii_art"><code class="docutils literal notranslate"><span class="pre">image_to_ascii_art()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.handwriting">src.handwriting module</a><ul>
+<li><a class="reference internal" href="#src.handwriting.text_to_handwriting"><code class="docutils literal notranslate"><span class="pre">text_to_handwriting()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.mail">src.mail module</a><ul>
+<li><a class="reference internal" href="#src.mail.send_hmail"><code class="docutils literal notranslate"><span class="pre">send_hmail()</span></code></a></li>
+<li><a class="reference internal" href="#src.mail.send_mail"><code class="docutils literal notranslate"><span class="pre">send_mail()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.misc">src.misc module</a><ul>
+<li><a class="reference internal" href="#src.misc.info"><code class="docutils literal notranslate"><span class="pre">info()</span></code></a></li>
+<li><a class="reference internal" href="#src.misc.playonyt"><code class="docutils literal notranslate"><span class="pre">playonyt()</span></code></a></li>
+<li><a class="reference internal" href="#src.misc.search"><code class="docutils literal notranslate"><span class="pre">search()</span></code></a></li>
+<li><a class="reference internal" href="#src.misc.show_history"><code class="docutils literal notranslate"><span class="pre">show_history()</span></code></a></li>
+<li><a class="reference internal" href="#src.misc.take_screenshot"><code class="docutils literal notranslate"><span class="pre">take_screenshot()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.remotekit">src.remotekit module</a><ul>
+<li><a class="reference internal" href="#src.remotekit.do_click"><code class="docutils literal notranslate"><span class="pre">do_click()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.ghasit_mouse"><code class="docutils literal notranslate"><span class="pre">ghasit_mouse()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.handle"><code class="docutils literal notranslate"><span class="pre">handle()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.scrollerr"><code class="docutils literal notranslate"><span class="pre">scrollerr()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.send"><code class="docutils literal notranslate"><span class="pre">send()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.slashN"><code class="docutils literal notranslate"><span class="pre">slashN()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.start_server"><code class="docutils literal notranslate"><span class="pre">start_server()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.startt"><code class="docutils literal notranslate"><span class="pre">startt()</span></code></a></li>
+<li><a class="reference internal" href="#src.remotekit.typeit"><code class="docutils literal notranslate"><span class="pre">typeit()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.sc">src.sc module</a><ul>
+<li><a class="reference internal" href="#src.sc.cancel_shutdown"><code class="docutils literal notranslate"><span class="pre">cancel_shutdown()</span></code></a></li>
+<li><a class="reference internal" href="#src.sc.shutdown"><code class="docutils literal notranslate"><span class="pre">shutdown()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.whats">src.whats module</a><ul>
+<li><a class="reference internal" href="#src.whats.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.open_web"><code class="docutils literal notranslate"><span class="pre">open_web()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendimg_or_video_immediately"><code class="docutils literal notranslate"><span class="pre">sendimg_or_video_immediately()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatmsg"><code class="docutils literal notranslate"><span class="pre">sendwhatmsg()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatmsg_instantly"><code class="docutils literal notranslate"><span class="pre">sendwhatmsg_instantly()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatmsg_to_group"><code class="docutils literal notranslate"><span class="pre">sendwhatmsg_to_group()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatmsg_to_group_instantly"><code class="docutils literal notranslate"><span class="pre">sendwhatmsg_to_group_instantly()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatsdoc_immediately"><code class="docutils literal notranslate"><span class="pre">sendwhatsdoc_immediately()</span></code></a></li>
+<li><a class="reference internal" href="#src.whats.sendwhatsmsg_to_all"><code class="docutils literal notranslate"><span class="pre">sendwhatsmsg_to_all()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AsyncPywhatKit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">src package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-package">
+<h1>src package<a class="headerlink" href="#src-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="src.Core.html">src.Core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="src.Core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="src.Core.html#module-src.Core.core">src.Core.core module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.check_connection"><code class="docutils literal notranslate"><span class="pre">check_connection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.check_number"><code class="docutils literal notranslate"><span class="pre">check_number()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.close_tab"><code class="docutils literal notranslate"><span class="pre">close_tab()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.find_document"><code class="docutils literal notranslate"><span class="pre">find_document()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.find_link"><code class="docutils literal notranslate"><span class="pre">find_link()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.find_photo_or_video"><code class="docutils literal notranslate"><span class="pre">find_photo_or_video()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.find_recent_chat"><code class="docutils literal notranslate"><span class="pre">find_recent_chat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.findtextbox"><code class="docutils literal notranslate"><span class="pre">findtextbox()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.core.send_message"><code class="docutils literal notranslate"><span class="pre">send_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.Core.html#module-src.Core.exceptions">src.Core.exceptions module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.CallTimeException"><code class="docutils literal notranslate"><span class="pre">CallTimeException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.CountryCodeException"><code class="docutils literal notranslate"><span class="pre">CountryCodeException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.InternetException"><code class="docutils literal notranslate"><span class="pre">InternetException</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.InvalidPhoneNumber"><code class="docutils literal notranslate"><span class="pre">InvalidPhoneNumber</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.UnableToAccessApi"><code class="docutils literal notranslate"><span class="pre">UnableToAccessApi</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.exceptions.UnsupportedEmailProvider"><code class="docutils literal notranslate"><span class="pre">UnsupportedEmailProvider</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.Core.html#module-src.Core.log">src.Core.log module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.log.format_message"><code class="docutils literal notranslate"><span class="pre">format_message()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.log.log_image"><code class="docutils literal notranslate"><span class="pre">log_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="src.Core.html#src.Core.log.log_message"><code class="docutils literal notranslate"><span class="pre">log_message()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="src.Core.html#module-src.Core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.ascii_art">
+<span id="src-ascii-art-module"></span><h2>src.ascii_art module<a class="headerlink" href="#module-src.ascii_art" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.ascii_art.image_to_ascii_art">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.ascii_art.</span></span><span class="sig-name descname"><span class="pre">image_to_ascii_art</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pywhatkit_asciiart'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/ascii_art.html#image_to_ascii_art"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.ascii_art.image_to_ascii_art" title="Permalink to this definition"></a></dt>
+<dd><p>Convert an Image to ASCII Art</p>
+</dd></dl>
+
+</section>
+<section id="module-src.handwriting">
+<span id="src-handwriting-module"></span><h2>src.handwriting module<a class="headerlink" href="#module-src.handwriting" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.handwriting.text_to_handwriting">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.handwriting.</span></span><span class="sig-name descname"><span class="pre">text_to_handwriting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pywhatkit.png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rgb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0,</span> <span class="pre">0,</span> <span class="pre">0)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/handwriting.html#text_to_handwriting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.handwriting.text_to_handwriting" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the given String to Handwritten Characters</p>
+</dd></dl>
+
+</section>
+<section id="module-src.mail">
+<span id="src-mail-module"></span><h2>src.mail module<a class="headerlink" href="#module-src.mail" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.mail.send_hmail">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.mail.</span></span><span class="sig-name descname"><span class="pre">send_hmail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">html_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/mail.html#send_hmail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.mail.send_hmail" title="Permalink to this definition"></a></dt>
+<dd><p>Send an Email with HTML Code</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.mail.send_mail">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.mail.</span></span><span class="sig-name descname"><span class="pre">send_mail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_sender</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subject</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">MIMEText</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">email_receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/mail.html#send_mail"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.mail.send_mail" title="Permalink to this definition"></a></dt>
+<dd><p>Send an Email</p>
+</dd></dl>
+
+</section>
+<section id="module-src.misc">
+<span id="src-misc-module"></span><h2>src.misc module<a class="headerlink" href="#module-src.misc" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.misc.info">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.misc.</span></span><span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lines</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/misc.html#info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.misc.info" title="Permalink to this definition"></a></dt>
+<dd><p>Gives Information on the Topic</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.misc.playonyt">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.misc.</span></span><span class="sig-name descname"><span class="pre">playonyt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_api</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">open_video</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/misc.html#playonyt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.misc.playonyt" title="Permalink to this definition"></a></dt>
+<dd><p>Play a YouTube Video</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.misc.search">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.misc.</span></span><span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/misc.html#search"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.misc.search" title="Permalink to this definition"></a></dt>
+<dd><p>Searches About the Topic on Google</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.misc.show_history">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.misc.</span></span><span class="sig-name descname"><span class="pre">show_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/misc.html#show_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.misc.show_history" title="Permalink to this definition"></a></dt>
+<dd><p>Prints the Log File Generated by the Library</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.misc.take_screenshot">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.misc.</span></span><span class="sig-name descname"><span class="pre">take_screenshot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'pywhatkit_screenshot'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/misc.html#take_screenshot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.misc.take_screenshot" title="Permalink to this definition"></a></dt>
+<dd><p>Take Screenshot of the Screen</p>
+</dd></dl>
+
+</section>
+<section id="module-src.remotekit">
+<span id="src-remotekit-module"></span><h2>src.remotekit module<a class="headerlink" href="#module-src.remotekit" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.do_click">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">do_click</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#do_click"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.do_click" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.ghasit_mouse">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">ghasit_mouse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#ghasit_mouse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.ghasit_mouse" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.handle">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">handle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#handle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.handle" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.scrollerr">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">scrollerr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#scrollerr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.scrollerr" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.send">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.send" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.slashN">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">slashN</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#slashN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.slashN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.start_server">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">start_server</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/remotekit.html#start_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.start_server" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.startt">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">startt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#startt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.startt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.remotekit.typeit">
+<span class="sig-prename descclassname"><span class="pre">src.remotekit.</span></span><span class="sig-name descname"><span class="pre">typeit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/remotekit.html#typeit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.remotekit.typeit" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-src.sc">
+<span id="src-sc-module"></span><h2>src.sc module<a class="headerlink" href="#module-src.sc" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.sc.cancel_shutdown">
+<span class="sig-prename descclassname"><span class="pre">src.sc.</span></span><span class="sig-name descname"><span class="pre">cancel_shutdown</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/sc.html#cancel_shutdown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.sc.cancel_shutdown" title="Permalink to this definition"></a></dt>
+<dd><p>Cancels the Scheduled Shutdown</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.sc.shutdown">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.sc.</span></span><span class="sig-name descname"><span class="pre">shutdown</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/sc.html#shutdown"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.sc.shutdown" title="Permalink to this definition"></a></dt>
+<dd><p>Schedules a Shutdown after the Specified Time</p>
+</dd></dl>
+
+</section>
+<section id="module-src.whats">
+<span id="src-whats-module"></span><h2>src.whats module<a class="headerlink" href="#module-src.whats" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.main">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/whats.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.main" title="Permalink to this definition"></a></dt>
+<dd><p>Check the internet connection.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.open_web">
+<span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">open_web</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/src/whats.html#open_web"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.open_web" title="Permalink to this definition"></a></dt>
+<dd><p>Opens WhatsApp Web</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendimg_or_video_immediately">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendimg_or_video_immediately</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phone_no</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendimg_or_video_immediately"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendimg_or_video_immediately" title="Permalink to this definition"></a></dt>
+<dd><p>Send an image or video file via WhatsApp instantly.</p>
+<p>This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends an image or video file to the specified phone number.</p>
+<p>Parameters:
+phone_no: The phone number to send the file to.
+path: The file path of the image or video file to be sent.
+wait_time: The time to wait before sending the file (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the file.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatmsg">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatmsg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phone_no</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_hour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatmsg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatmsg" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp message at a certain time.</p>
+<p>This function schedules the sending of a WhatsApp message to a specified phone number at a specified time.</p>
+<p>Parameters:
+phone_no: The phone number to send the message to.
+message: The message to be sent.
+time_hour: The hour at which to send the message (in 24-hour format).
+time_min: The minute at which to send the message.
+wait_time: The time to wait before sending the message (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the message.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatmsg_instantly">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatmsg_instantly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phone_no</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatmsg_instantly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatmsg_instantly" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp message instantly.</p>
+<p>This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends a message to the specified phone number.</p>
+<p>Parameters:
+message: The message to be sent.
+phone_no: The phone number to send the message to.
+wait_time: The time to wait before sending the message (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the message.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatmsg_to_group">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatmsg_to_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_hour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatmsg_to_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatmsg_to_group" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp message to a group at a certain time.</p>
+<p>This function schedules the sending of a WhatsApp message to a specified group at a specified time.</p>
+<p>Parameters:
+group_id: The ID of the group to send the message to.
+message: The message to be sent.
+time_hour: The hour at which to send the message (in 24-hour format).
+time_min: The minute at which to send the message.
+wait_time: The time to wait before sending the message (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the message.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatmsg_to_group_instantly">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatmsg_to_group_instantly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatmsg_to_group_instantly"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatmsg_to_group_instantly" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp message to a group instantly.</p>
+<p>This function opens the WhatsApp Web page in a new tab and sends a message to the specified group.</p>
+<p>Parameters:
+group_id: The ID of the group to send the message to.
+message: The message to be sent.
+wait_time: The time to wait before sending the message (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the message.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatsdoc_immediately">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatsdoc_immediately</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phone_no</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatsdoc_immediately"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatsdoc_immediately" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp document instantly.</p>
+<p>This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends a document to the specified phone number.</p>
+<p>Parameters:
+phone_no: The phone number to send the document to.
+path: The file path of the document to be sent.
+wait_time: The time to wait before sending the document (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the document.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.whats.sendwhatsmsg_to_all">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.whats.</span></span><span class="sig-name descname"><span class="pre">sendwhatsmsg_to_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phone_nos</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_hour</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tab_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">close_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/whats.html#sendwhatsmsg_to_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.whats.sendwhatsmsg_to_all" title="Permalink to this definition"></a></dt>
+<dd><p>Send a WhatsApp message to a list of phone numbers at a certain time.</p>
+<p>This function schedules the sending of a WhatsApp message to a list of specified phone numbers at a specified time.</p>
+<p>Parameters:
+phone_nos: The list of phone numbers to send the message to.
+message: The message to be sent.
+time_hour: The hour at which to send the message (in 24-hour format).
+time_min: The minute at which to send the message.
+wait_time: The time to wait before sending the message (in seconds).
+tab_close: A flag indicating whether to close the tab after sending the message.
+close_time: The time to wait before closing the tab (in seconds).</p>
+<p>Returns:
+None.</p>
+</dd></dl>
+
+</section>
+<section id="module-src">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Sigireddy Balasai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

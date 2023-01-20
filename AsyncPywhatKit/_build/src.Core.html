@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>src.Core package &mdash; AsyncPywhatKit 1.1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> AsyncPywhatKit
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">src.Core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-src.Core.core">src.Core.core module</a><ul>
+<li><a class="reference internal" href="#src.Core.core.check_connection"><code class="docutils literal notranslate"><span class="pre">check_connection()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.check_number"><code class="docutils literal notranslate"><span class="pre">check_number()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.close_tab"><code class="docutils literal notranslate"><span class="pre">close_tab()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.find_document"><code class="docutils literal notranslate"><span class="pre">find_document()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.find_link"><code class="docutils literal notranslate"><span class="pre">find_link()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.find_photo_or_video"><code class="docutils literal notranslate"><span class="pre">find_photo_or_video()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.find_recent_chat"><code class="docutils literal notranslate"><span class="pre">find_recent_chat()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.findtextbox"><code class="docutils literal notranslate"><span class="pre">findtextbox()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.core.send_message"><code class="docutils literal notranslate"><span class="pre">send_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.Core.exceptions">src.Core.exceptions module</a><ul>
+<li><a class="reference internal" href="#src.Core.exceptions.CallTimeException"><code class="docutils literal notranslate"><span class="pre">CallTimeException</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.exceptions.CountryCodeException"><code class="docutils literal notranslate"><span class="pre">CountryCodeException</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.exceptions.InternetException"><code class="docutils literal notranslate"><span class="pre">InternetException</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.exceptions.InvalidPhoneNumber"><code class="docutils literal notranslate"><span class="pre">InvalidPhoneNumber</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.exceptions.UnableToAccessApi"><code class="docutils literal notranslate"><span class="pre">UnableToAccessApi</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.exceptions.UnsupportedEmailProvider"><code class="docutils literal notranslate"><span class="pre">UnsupportedEmailProvider</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.Core.log">src.Core.log module</a><ul>
+<li><a class="reference internal" href="#src.Core.log.format_message"><code class="docutils literal notranslate"><span class="pre">format_message()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.log.log_image"><code class="docutils literal notranslate"><span class="pre">log_image()</span></code></a></li>
+<li><a class="reference internal" href="#src.Core.log.log_message"><code class="docutils literal notranslate"><span class="pre">log_message()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-src.Core">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AsyncPywhatKit</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">src.Core package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/src.Core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="src-core-package">
+<h1>src.Core package<a class="headerlink" href="#src-core-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-src.Core.core">
+<span id="src-core-core-module"></span><h2>src.Core.core module<a class="headerlink" href="#module-src.Core.core" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.check_connection">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">check_connection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/core.html#check_connection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.check_connection" title="Permalink to this definition"></a></dt>
+<dd><p>Check the Internet connection of the Host Machine</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.check_number">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">check_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/src/Core/core.html#check_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.check_number" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the Number is Valid or not</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.close_tab">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">close_tab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/core.html#close_tab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.close_tab" title="Permalink to this definition"></a></dt>
+<dd><p>Closes the Currently Opened Browser Tab</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.find_document">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">find_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/Core/core.html#find_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.find_document" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.find_link">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">find_link</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/Core/core.html#find_link"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.find_link" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.find_photo_or_video">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">find_photo_or_video</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/Core/core.html#find_photo_or_video"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.find_photo_or_video" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.find_recent_chat">
+<span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">find_recent_chat</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/Core/core.html#find_recent_chat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.find_recent_chat" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.findtextbox">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">findtextbox</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/core.html#findtextbox"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.findtextbox" title="Permalink to this definition"></a></dt>
+<dd><p>click on text box</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.core.send_message">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.core.</span></span><span class="sig-name descname"><span class="pre">send_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/core.html#send_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.core.send_message" title="Permalink to this definition"></a></dt>
+<dd><p>Parses and Sends the Message</p>
+</dd></dl>
+
+</section>
+<section id="module-src.Core.exceptions">
+<span id="src-core-exceptions-module"></span><h2>src.Core.exceptions module<a class="headerlink" href="#module-src.Core.exceptions" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.CallTimeException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">CallTimeException</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#CallTimeException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.CallTimeException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Wait time is too short for WhatsApp Web to Open</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.CountryCodeException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">CountryCodeException</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#CountryCodeException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.CountryCodeException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Country Code is not present in the Phone Number</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.InternetException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">InternetException</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#InternetException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.InternetException" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Host machine is not connected to the Internet or the connection Speed is Slow</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.InvalidPhoneNumber">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">InvalidPhoneNumber</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#InvalidPhoneNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.InvalidPhoneNumber" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Phone number given is invalid</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.UnableToAccessApi">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnableToAccessApi</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#UnableToAccessApi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.UnableToAccessApi" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>unable to access pywhatkit api</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.Core.exceptions.UnsupportedEmailProvider">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.exceptions.</span></span><span class="sig-name descname"><span class="pre">UnsupportedEmailProvider</span></span><a class="reference internal" href="_modules/src/Core/exceptions.html#UnsupportedEmailProvider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.exceptions.UnsupportedEmailProvider" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Email provider used to send the Email is not supported</p>
+</dd></dl>
+
+</section>
+<section id="module-src.Core.log">
+<span id="src-core-log-module"></span><h2>src.Core.log module<a class="headerlink" href="#module-src.Core.log" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.log.format_message">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.log.</span></span><span class="sig-name descname"><span class="pre">format_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/src/Core/log.html#format_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.log.format_message" title="Permalink to this definition"></a></dt>
+<dd><p>Formats the Message to remove redundant Spaces and Newline chars</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.log.log_image">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.log.</span></span><span class="sig-name descname"><span class="pre">log_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">struct_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">caption</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/log.html#log_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.log.log_image" title="Permalink to this definition"></a></dt>
+<dd><p>Logs the Image Information after it is Sent</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.Core.log.log_message">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.Core.log.</span></span><span class="sig-name descname"><span class="pre">log_message</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">struct_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">receiver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/src/Core/log.html#log_message"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.Core.log.log_message" title="Permalink to this definition"></a></dt>
+<dd><p>Logs the Message Information after it is Sent</p>
+</dd></dl>
+
+</section>
+<section id="module-src.Core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.Core" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Sigireddy Balasai.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

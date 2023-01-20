@@ -8,20 +8,20 @@ def readme() -> str:
 
 
 def reqs():
-    with open("C:\\Users\\sigir\\AsyncPywhatKit\\requirements.txt", "r") as f:
-        reqs = [line.strip() for line in f]
-        return reqs
+    with open("C:\\Users\\admin\\PycharmProjects\\AsyncPywhatKit\\requirements.txt", "r") as f:
+        requirements = [line.strip() for line in f]
+        return requirements
 
 
 setup(
     name="AsyncPywhatKit",
-    packages=['AsyncPywhatKit'],
+    packages=['AsyncPywhatKit.src'],
     version="2.0.0",
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",
     author_email="sigireddybalasai@gmail.com",
-    url="https://github.com/SigireddyBalasai/PyWhatKit",
+    url="https://github.com/SigireddyBalasai/AsyncPywhatKit",
     download_url="https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz",
     keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial", "async pywhatkit"],
     install_requires=reqs(),

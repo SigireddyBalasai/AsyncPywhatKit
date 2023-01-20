@@ -3,7 +3,7 @@ from platform import system
 from .ascii_art import image_to_ascii_art
 from .handwriting import text_to_handwriting
 from .mail import send_hmail, send_mail
-from .misc import info, playonyt, search, show_history, take_screenshot
+from .misc import info, playonyt, search, show_history
 from .sc import cancel_shutdown, shutdown
 from .Core import core,exceptions,log
 from .whats import (
