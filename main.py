@@ -1,12 +1,17 @@
 import asyncio
 import os
-from AsyncPywhatKit.src import sendimg_or_video_immediately
+from AsyncPywhatKit.src.Core.core import find_link
 
 print(os.path.abspath("/Core/data/document.png"))
 
 
 async def main():
-    await sendimg_or_video_immediately("+91 9398993400", ['AsyncPywhatKit/Core/data/document.png','AsyncPywhatKit/Core/data/link.png'])
+    while True:
+        try:
+            ok = await find_link()
+            print(ok)
+        except:
+            pass
 
 
 loop = asyncio.get_event_loop()

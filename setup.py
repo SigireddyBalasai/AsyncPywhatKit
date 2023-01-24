@@ -1,4 +1,5 @@
 from distutils.core import setup
+import pathlib
 
 
 def readme() -> str:
@@ -8,15 +9,15 @@ def readme() -> str:
 
 
 def reqs():
-    with open("C:\\Users\\admin\\PycharmProjects\\AsyncPywhatKit\\requirements.txt", "r") as f:
+    with open("C:\\Users\\sigir\\PycharmProjects\\AsyncPywhatKit\\requirements.txt", "r") as f:
         requirements = [line.strip() for line in f]
         return requirements
 
 
 setup(
     name="AsyncPywhatKit",
-    packages=['AsyncPywhatKit.src'],
-    version="2.0.0",
+    packages=['AsyncPywhatKit.src', 'AsyncPywhatKit.src.Core'],
+    version="2.1.0",
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",

@@ -19,14 +19,13 @@ async def main():
     await core.check_connection()
 
 
-
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 
 
 async def sendwhatmsg_instantly(
-        message: str,
         phone_no: str,
+        message: str,
         wait_time: int = 15,
         tab_close: bool = True,
         close_time: int = 3
@@ -46,6 +45,7 @@ async def sendwhatmsg_instantly(
     None.
     """
     print(phone_no)
+    print(await core.check_number(number=phone_no))
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
     phone_no = phone_no.replace(" ", "")
@@ -61,15 +61,14 @@ async def sendwhatmsg_instantly(
         await core.close_tab(wait_time=close_time)
 
 
-
 async def sendwhatmsg(
-    phone_no: str = None,
-    message: str = None,
-    time_hour: int = None,
-    time_min: int = None,
-    wait_time: int = 15,
-    tab_close: bool = False,
-    close_time: int = 3,
+        phone_no: str = None,
+        message: str = None,
+        time_hour: int = None,
+        time_min: int = None,
+        wait_time: int = 15,
+        tab_close: bool = False,
+        close_time: int = 3,
 ) -> None:
     """Send a WhatsApp message at a certain time.
     
@@ -115,7 +114,7 @@ async def sendwhatmsg(
         f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
     )
     await asyncio.sleep(sleep_time)
-    await sendwhatmsg_instantly(message,phone_no)
+    await sendwhatmsg_instantly(message, phone_no)
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
@@ -201,6 +200,7 @@ async def sendwhatmsg_to_group_instantly(
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
+
 async def sendwhatsmsg_to_all(
         phone_nos: List[str],
         message: str,
@@ -230,7 +230,6 @@ async def sendwhatsmsg_to_all(
         await sendwhatmsg(
             phone_n, message, time_hour, time_min, wait_time, tab_close, close_time
         )
-
 
 
 async def sendimg_or_video_immediately(
@@ -293,6 +292,7 @@ async def sendimg_or_video_immediately(
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
+
 async def sendwhatsdoc_immediately(
         phone_no: str,
         path: str,
@@ -353,7 +353,6 @@ None.
     keyboard.release("enter")
     if tab_close:
         await core.close_tab(wait_time=close_time)
-
 
 
 def open_web() -> bool:

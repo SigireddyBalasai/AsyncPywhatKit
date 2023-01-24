@@ -15,7 +15,7 @@ WIDTH, HEIGHT = size()
 async def check_number(number: str) -> bool:
     """Checks if the Number is Valid or not"""
 
-    return "+" in number or "_" in number
+    return ("+" in number) or ("_" in number)
 
 
 async def close_tab(wait_time: int = 2) -> None:
@@ -59,15 +59,12 @@ async def findtextbox() -> None:
 
 async def find_link():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    try:
-        location = locateOnScreen(f"{dir_path}\\data\\link.png")
-        moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-        click()
-    except Exception:
-        location = locateOnScreen(f"{dir_path}\\data\\link2.png")
-        moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-        print(location)
-        click()
+    print(f"{dir_path}\\data\\link.png")
+    location = locateOnScreen(f"{dir_path}\\data\\link.png")
+    location2 = locateOnScreen(f"{dir_path}\\data\\link2.png")
+    print(location,location2)
+    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+    click()
 
 
 async def find_document():
@@ -134,3 +131,4 @@ async def send_message(message: str, receiver: str, wait_time: int) -> None:
                 typewrite(char)
     await findtextbox()
     press("enter")
+
