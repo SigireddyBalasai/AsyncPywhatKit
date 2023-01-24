@@ -63,6 +63,7 @@ async def find_link():
     location = locateOnScreen(f"{dir_path}\\data\\link.png")
     location2 = locateOnScreen(f"{dir_path}\\data\\link2.png")
     print(location,location2)
+    location = location or location2
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
 

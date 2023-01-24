@@ -1,17 +1,12 @@
 import asyncio
 import os
-from AsyncPywhatKit.src.Core.core import find_link
+from AsyncPywhatKit.src import sendwhatsdoc_immediately
 
 print(os.path.abspath("/Core/data/document.png"))
 
 
 async def main():
-    while True:
-        try:
-            ok = await find_link()
-            print(ok)
-        except:
-            pass
+    await  sendwhatsdoc_immediately("+91 9398993400",'C:\\Users\\sigir\\PycharmProjects\\AsyncPywhatKit\\AsyncPywhatKit\\src\\whats.py')
 
 
 loop = asyncio.get_event_loop()

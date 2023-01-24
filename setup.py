@@ -17,7 +17,7 @@ def reqs():
 setup(
     name="AsyncPywhatKit",
     packages=['AsyncPywhatKit.src', 'AsyncPywhatKit.src.Core'],
-    version="2.1.0",
+    version="2.1.1",
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",
