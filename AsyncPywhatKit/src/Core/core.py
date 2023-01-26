@@ -60,17 +60,25 @@ async def findtextbox() -> None:
 async def find_link():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     print(f"{dir_path}\\data\\link.png")
-    location = locateOnScreen(f"{dir_path}\\data\\link.png")
-    location2 = locateOnScreen(f"{dir_path}\\data\\link2.png")
-    print(location,location2)
-    location = location or location2
+    linkpaths = ["link.png","link2.png"]
+    locations = [locateOnScreen(f"{dir_path}\\data\\{loc}",grayscale=True,confidence=0.9,multiscale=True) for loc in linkpaths ]
+    # location = locateOnScreen(f"{dir_path}\\data\\link.png")
+    # location2 = locateOnScreen(f"{dir_path}\\data\\link2.png")
+    # location3 = locateOnScreen(f"{dir_path}\\data\\link2res.png")
+    location = None
+    y = 0
+    for poslink in locations:
+        if poslink is not None and poslink[1] > y:
+            y = poslink[1]
+            location = poslink
+    print(location)
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
 
 
 async def find_document():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\document.png")
+    location = locateOnScreen(f"{dir_path}\\data\\document.png",confidence=0.5,multiscale=True)
     print(location)
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
