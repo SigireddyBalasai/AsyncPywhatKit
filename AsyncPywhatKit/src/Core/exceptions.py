@@ -13,6 +13,12 @@ class CallTimeException(Exception):
 
     pass
 
+class ImageNotFoundException(Exception):
+    """
+    No image was finded while searching with template matching algorithm
+    """
+    pass
+    
 
 class InternetException(Exception):
     """
@@ -20,7 +26,6 @@ class InternetException(Exception):
     """
 
     pass
-
 
 class InvalidPhoneNumber(Exception):
     """

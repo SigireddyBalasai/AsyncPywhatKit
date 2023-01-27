@@ -1,13 +1,18 @@
 import asyncio
 import os
+import time
+from concurrent.futures import ThreadPoolExecutor,as_completed
 from platform import system
 from urllib.parse import quote
 from webbrowser import open
 
 import aiohttp
-from pyautogui import click, hotkey, locateOnScreen, moveTo, press, size, typewrite
+from pyautogui import click, hotkey, moveTo, press, size, typewrite
+from pyscreeze import Box,screenshot
+import cv2
+import numpy as np
 
-from .exceptions import InternetException
+from .exceptions import InternetException, ImageNotFoundException
 
 WIDTH, HEIGHT = size()
 
@@ -62,9 +67,6 @@ async def find_link():
     print(f"{dir_path}\\data\\link.png")
     linkpaths = ["link.png","link2.png"]
     locations = [locateOnScreen(f"{dir_path}\\data\\{loc}",grayscale=True,confidence=0.9,multiscale=True) for loc in linkpaths ]
-    # location = locateOnScreen(f"{dir_path}\\data\\link.png")
-    # location2 = locateOnScreen(f"{dir_path}\\data\\link2.png")
-    # location3 = locateOnScreen(f"{dir_path}\\data\\link2res.png")
     location = None
     y = 0
     for poslink in locations:
@@ -78,9 +80,10 @@ async def find_link():
 
 async def find_document():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\document.png",confidence=0.5,multiscale=True)
+    location = locateOnScreen(f"{dir_path}\\data\\document.png",confidence=0.8,multiscale=True,grayscale=True)
     print(location)
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+
+    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2) 
     click()
 
 
@@ -141,3 +144,117 @@ async def send_message(message: str, receiver: str, wait_time: int) -> None:
     await findtextbox()
     press("enter")
 
+def locateOnScreen(image,**kwargs):
+    """Locate button on screen using cv2.TemplateMatching algorithm
+
+        Parameters
+        ----------
+        image : str
+            The file location of the template image
+        grayscale : bool
+            Flag to run template matching using grayscale image
+        confidence : float
+            Confidence Threshold
+        mulstiscale : bool
+            Flag to run mulstiscale template matching from 1 to 0.8
+
+        Returns
+        -------
+        Box
+            a tuple of (x,y,w,h) of the best match
+    """
+    screenshotIm = screenshot(region=None) # the locateAll() function must handle cropping to return accurate coordinates, so don't pass a region here.
+    boxresult = locateMax_opencv(image, screenshotIm, **kwargs)
+    try:
+        screenshotIm.fp.close()
+    except AttributeError:
+        # Screenshots on Windows won't have an fp since they came from
+        # ImageGrab, not a file. Screenshots on Linux will have fp set
+        # to None since the file has been unlinked
+        pass
+    return boxresult
+
+def locateMax_opencv(template:str, 
+                     screenImage:str,
+                     grayscale:bool=False, 
+                     region=None, 
+                     confidence=0.9,
+                     multiscale=False) -> Box:
+    """Locate button using cv2.TemplateMatching algorithm
+
+        Parameters
+        ----------
+        template : str
+            The file location of the template image
+        screenImage : PIL.Image
+            The screenshot done using pyscreeze
+        grayscale : bool
+            Flag to run template matching using grayscale image
+        confidence : float
+            Confidence Threshold
+        mulstiscale : bool
+            Flag to run mulstiscale template matching from 1 to 0.8
+
+        Returns
+        -------
+        Box
+            a tuple of (x,y,w,h) of the best match
+    """
+    confidence = float(confidence)
+
+    template = loadImage(template, grayscale)
+    templateH, templateW = template.shape[:2]
+    screenImage = loadImage(screenImage, grayscale)
+
+    if region:
+        screenImage = screenImage[region[1]:region[1]+region[3],
+                                      region[0]:region[0]+region[2]]
+    else:
+        region = (0, 0)  # full image; these values used in the yield statement
+    if (screenImage.shape[0] < template.shape[0] or
+        screenImage.shape[1] < template.shape[1]):
+        # avoid semi-cryptic OpenCV error below if bad size
+        raise ValueError('needle dimension(s) exceed the haystack image or region dimensions')
+
+    if multiscale:
+        sizes = [1,0.9,0.85,0.8]
+        x,y = None,None
+        with ThreadPoolExecutor() as executor:
+            future_to_contour = {executor.submit(cv2.matchTemplate,
+                                                screenImage.copy(),
+                                                cv2.resize(template.copy(),(0,0),fx=size,fy=size), 
+                                                cv2.TM_CCORR_NORMED ):size for size in sizes}
+            for  future in as_completed(future_to_contour):
+                _,maxVal,_,maxLoc = cv2.minMaxLoc(future.result())
+                if maxVal >= confidence:
+                    confidence = maxVal
+                    x = maxLoc[0]
+                    y = maxLoc[1] 
+        if x is not None: 
+            matchx = x + region[0]  
+            matchy = y + region[1]
+            return Box(matchx, matchy, templateW, templateH,maxVal)
+        else:
+            raise ImageNotFoundException 
+
+
+    result = cv2.matchTemplate(screenImage, template, cv2.TM_CCORR_NORMED)
+    (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
+
+    if len(result) == 0:
+            raise ImageNotFoundException
+    if maxVal >= confidence:
+        
+        matchx = maxLoc[0] + region[0]  
+        matchy = maxLoc[1] + region[1]
+        
+        return Box(matchx, matchy, templateW, templateH,maxVal)
+    return 
+    
+def loadImage(img2load,
+                gray:bool):
+    
+    if type(img2load) is str :
+        assert os.path.exists(img2load)
+        return cv2.imread(img2load) if not gray else cv2.cvtColor(cv2.imread(img2load),cv2.COLOR_BGR2GRAY)
+    return np.array(img2load) if not gray else cv2.cvtColor(np.array(img2load),cv2.COLOR_BGR2GRAY)
