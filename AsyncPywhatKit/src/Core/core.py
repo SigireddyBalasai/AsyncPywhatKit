@@ -144,7 +144,9 @@ async def send_message(message: str, receiver: str, wait_time: int) -> None:
     await findtextbox()
     press("enter")
 
+
 def locateOnScreen(image,**kwargs):
+
     """Locate button on screen using cv2.TemplateMatching algorithm
 
         Parameters
@@ -163,21 +165,22 @@ def locateOnScreen(image,**kwargs):
         Box
             a tuple of (x,y,w,h) of the best match
     """
-    screenshotIm = screenshot(region=None) # the locateAll() function must handle cropping to return accurate coordinates, so don't pass a region here.
+    screenshotIm = screenshot(region=None) 
     boxresult = locateMax_opencv(image, screenshotIm, **kwargs)
     try:
         screenshotIm.fp.close()
     except AttributeError:
+        #FROM pyscreeze
         # Screenshots on Windows won't have an fp since they came from
         # ImageGrab, not a file. Screenshots on Linux will have fp set
         # to None since the file has been unlinked
         pass
     return boxresult
 
+
 def locateMax_opencv(template:str, 
                      screenImage:str,
                      grayscale:bool=False, 
-                     region=None, 
                      confidence=0.9,
                      multiscale=False) -> Box:
     """Locate button using cv2.TemplateMatching algorithm
@@ -206,11 +209,6 @@ def locateMax_opencv(template:str,
     templateH, templateW = template.shape[:2]
     screenImage = loadImage(screenImage, grayscale)
 
-    if region:
-        screenImage = screenImage[region[1]:region[1]+region[3],
-                                      region[0]:region[0]+region[2]]
-    else:
-        region = (0, 0)  # full image; these values used in the yield statement
     if (screenImage.shape[0] < template.shape[0] or
         screenImage.shape[1] < template.shape[1]):
         # avoid semi-cryptic OpenCV error below if bad size
@@ -218,7 +216,7 @@ def locateMax_opencv(template:str,
 
     if multiscale:
         sizes = [1,0.9,0.85,0.8]
-        x,y = None,None
+        matchx,matchy = None,None
         with ThreadPoolExecutor() as executor:
             future_to_contour = {executor.submit(cv2.matchTemplate,
                                                 screenImage.copy(),
@@ -228,11 +226,9 @@ def locateMax_opencv(template:str,
                 _,maxVal,_,maxLoc = cv2.minMaxLoc(future.result())
                 if maxVal >= confidence:
                     confidence = maxVal
-                    x = maxLoc[0]
-                    y = maxLoc[1] 
-        if x is not None: 
-            matchx = x + region[0]  
-            matchy = y + region[1]
+                    matchx = maxLoc[0]
+                    matchy = maxLoc[1] 
+        if matchx is not None: 
             return Box(matchx, matchy, templateW, templateH,maxVal)
         else:
             raise ImageNotFoundException 
@@ -245,12 +241,13 @@ def locateMax_opencv(template:str,
             raise ImageNotFoundException
     if maxVal >= confidence:
         
-        matchx = maxLoc[0] + region[0]  
-        matchy = maxLoc[1] + region[1]
+        matchx = maxLoc[0] 
+        matchy = maxLoc[1]
         
         return Box(matchx, matchy, templateW, templateH,maxVal)
     return 
     
+
 def loadImage(img2load,
                 gray:bool):
     
