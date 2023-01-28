@@ -1,6 +1,6 @@
 import asyncio
 import os
-import time
+import collections
 from concurrent.futures import ThreadPoolExecutor,as_completed
 from platform import system
 from urllib.parse import quote
@@ -8,7 +8,7 @@ from webbrowser import open
 
 import aiohttp
 from pyautogui import click, hotkey, moveTo, press, size, typewrite
-from pyscreeze import Box,screenshot
+from pyscreeze import screenshot
 import cv2
 import numpy as np
 
@@ -16,6 +16,7 @@ from .exceptions import InternetException, ImageNotFoundException
 
 WIDTH, HEIGHT = size()
 
+Box = collections.namedtuple('Box', 'left top width height score')
 
 async def check_number(number: str) -> bool:
     """Checks if the Number is Valid or not"""
