@@ -1,5 +1,8 @@
 from distutils.core import setup
 import pathlib
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 def readme() -> str:
@@ -9,7 +12,8 @@ def readme() -> str:
 
 
 def reqs():
-    with open("C:\\Users\\sigir\\PycharmProjects\\AsyncPywhatKit\\requirements.txt", "r") as f:
+    print(dir_path)
+    with open((dir_path + "//requirements.txt"), "r") as f:
         requirements = [line.strip() for line in f]
         return requirements
 
@@ -17,7 +21,8 @@ def reqs():
 setup(
     name="AsyncPywhatKit",
     packages=['AsyncPywhatKit.src', 'AsyncPywhatKit.src.Core'],
-    version="2.1.1",
+    version="2.2.5",
+    setup_requires=['setuptools_scm'],
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
     author="SigireddyBalasai",
@@ -26,7 +31,6 @@ setup(
     download_url="https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz",
     keywords=["sendwhatmsg", "info", "playonyt", "search", "watch_tutorial", "async pywhatkit"],
     install_requires=reqs(),
-    package_data={"pywhatkit": ["py.typed"]},
     include_package_data=True,
     long_description=readme(),
     long_description_content_type="text/markdown",
@@ -38,5 +42,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
     ],
 )

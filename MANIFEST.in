@@ -1,0 +1,5 @@
+recursive-include * \ data *.png
+recursive - exclude docs * .pyc
+recursive - exclude \docs **
+
+

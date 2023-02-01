@@ -235,6 +235,7 @@ async def sendwhatsmsg_to_all(
 async def sendimg_or_video_immediately(
         phone_no: str,
         path: str,
+        message : str = None,
         wait_time: int = 15,
         tab_close: bool = False,
         close_time: int = 3,
@@ -287,6 +288,8 @@ async def sendimg_or_video_immediately(
     keyboard.press("enter")
     keyboard.release("enter")
     time.sleep(1)
+    if message is not None:
+        keyboard.write(message)
     keyboard.press("enter")
     keyboard.release("enter")
     if tab_close:
@@ -296,6 +299,7 @@ async def sendimg_or_video_immediately(
 async def sendwhatsdoc_immediately(
         phone_no: str,
         path: str,
+        message : str = None,
         wait_time: int = 15,
         tab_close: bool = True,
         close_time: int = 3,
@@ -349,6 +353,8 @@ None.
     keyboard.press("enter")
     keyboard.release("enter")
     time.sleep(1)
+    if message is not None:
+        keyboard.write(message)
     keyboard.press("enter")
     keyboard.release("enter")
     if tab_close:

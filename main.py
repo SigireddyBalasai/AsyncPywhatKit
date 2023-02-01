@@ -6,7 +6,8 @@ print(os.path.abspath("/Core/data/document.png"))
 
 
 async def main():
-    await  sendwhatsdoc_immediately("+91 9398993400",'C:\\Users\\sigir\\PycharmProjects\\AsyncPywhatKit\\AsyncPywhatKit\\src\\whats.py')
+    await  sendwhatsdoc_immediately("+91 9398993400",
+                                    'C:\\Users\\sigir\\PycharmProjects\\AsyncPywhatKit\\AsyncPywhatKit\\src\\whats.py')
 
 
 loop = asyncio.get_event_loop()

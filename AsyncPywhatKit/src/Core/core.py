@@ -1,14 +1,15 @@
 import asyncio
 import os
 import collections
-from concurrent.futures import ThreadPoolExecutor,as_completed
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from platform import system
 from urllib.parse import quote
 from webbrowser import open
 
 import aiohttp
 from pyautogui import click, hotkey, moveTo, press, size, typewrite
-from pyscreeze import screenshot
+from pyscreeze import Box, screenshot
 import cv2
 import numpy as np
 
@@ -17,6 +18,7 @@ from .exceptions import InternetException, ImageNotFoundException
 WIDTH, HEIGHT = size()
 
 Box = collections.namedtuple('Box', 'left top width height score')
+
 
 async def check_number(number: str) -> bool:
     """Checks if the Number is Valid or not"""
@@ -66,8 +68,9 @@ async def findtextbox() -> None:
 async def find_link():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     print(f"{dir_path}\\data\\link.png")
-    linkpaths = ["link.png","link2.png"]
-    locations = [locateOnScreen(f"{dir_path}\\data\\{loc}",grayscale=True,confidence=0.9,multiscale=True) for loc in linkpaths ]
+    linkpaths = ["link.png", "link2.png"]
+    locations = [locateOnScreen(f"{dir_path}\\data\\{loc}", grayscale=True, confidence=0.9, multiscale=True) for loc in
+                 linkpaths]
     location = None
     y = 0
     for poslink in locations:
@@ -81,16 +84,16 @@ async def find_link():
 
 async def find_document():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\document.png",confidence=0.8,multiscale=True,grayscale=True)
+    location = locateOnScreen(f"{dir_path}\\data\\document.png", confidence=0.8, multiscale=True, grayscale=True)
     print(location)
 
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2) 
+    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
 
 
 async def find_photo_or_video():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\photo_or_video.png")
+    location = locateOnScreen(f"{dir_path}\\data\\photo_or_video.png",confidence=0.8, multiscale=True, grayscale=True)
     print(location)
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
@@ -146,8 +149,7 @@ async def send_message(message: str, receiver: str, wait_time: int) -> None:
     press("enter")
 
 
-def locateOnScreen(image,**kwargs):
-
+def locateOnScreen(image, **kwargs):
     """Locate button on screen using cv2.TemplateMatching algorithm
 
         Parameters
@@ -166,12 +168,12 @@ def locateOnScreen(image,**kwargs):
         Box
             a tuple of (x,y,w,h) of the best match
     """
-    screenshotIm = screenshot(region=None) 
+    screenshotIm = screenshot(region=None)
     boxresult = locateMax_opencv(image, screenshotIm, **kwargs)
     try:
         screenshotIm.fp.close()
     except AttributeError:
-        #FROM pyscreeze
+        # FROM pyscreeze
         # Screenshots on Windows won't have an fp since they came from
         # ImageGrab, not a file. Screenshots on Linux will have fp set
         # to None since the file has been unlinked
@@ -179,9 +181,9 @@ def locateOnScreen(image,**kwargs):
     return boxresult
 
 
-def locateMax_opencv(template:str, 
-                     screenImage:str,
-                     grayscale:bool=False, 
+def locateMax_opencv(template: str,
+                     screenImage: str,
+                     grayscale: bool = False,
                      confidence=0.9,
                      multiscale=False) -> Box:
     """Locate button using cv2.TemplateMatching algorithm
@@ -211,48 +213,45 @@ def locateMax_opencv(template:str,
     screenImage = loadImage(screenImage, grayscale)
 
     if (screenImage.shape[0] < template.shape[0] or
-        screenImage.shape[1] < template.shape[1]):
+            screenImage.shape[1] < template.shape[1]):
         # avoid semi-cryptic OpenCV error below if bad size
         raise ValueError('needle dimension(s) exceed the haystack image or region dimensions')
 
     if multiscale:
-        sizes = [1,0.9,0.85,0.8]
-        matchx,matchy = None,None
+        sizes = [1, 0.9, 0.85, 0.8]
+        matchx, matchy = None, None
         with ThreadPoolExecutor() as executor:
             future_to_contour = {executor.submit(cv2.matchTemplate,
-                                                screenImage.copy(),
-                                                cv2.resize(template.copy(),(0,0),fx=size,fy=size), 
-                                                cv2.TM_CCORR_NORMED ):size for size in sizes}
-            for  future in as_completed(future_to_contour):
-                _,maxVal,_,maxLoc = cv2.minMaxLoc(future.result())
+                                                 screenImage.copy(),
+                                                 cv2.resize(template.copy(), (0, 0), fx=size, fy=size),
+                                                 cv2.TM_CCORR_NORMED): size for size in sizes}
+            for future in as_completed(future_to_contour):
+                _, maxVal, _, maxLoc = cv2.minMaxLoc(future.result())
                 if maxVal >= confidence:
                     confidence = maxVal
                     matchx = maxLoc[0]
-                    matchy = maxLoc[1] 
-        if matchx is not None: 
-            return Box(matchx, matchy, templateW, templateH,maxVal)
+                    matchy = maxLoc[1]
+        if matchx is not None:
+            return Box(matchx, matchy, templateW, templateH, maxVal)
         else:
-            raise ImageNotFoundException 
-
+            raise ImageNotFoundException
 
     result = cv2.matchTemplate(screenImage, template, cv2.TM_CCORR_NORMED)
     (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
 
     if len(result) == 0:
-            raise ImageNotFoundException
+        raise ImageNotFoundException
     if maxVal >= confidence:
-        
-        matchx = maxLoc[0] 
+        matchx = maxLoc[0]
         matchy = maxLoc[1]
-        
-        return Box(matchx, matchy, templateW, templateH,maxVal)
-    return 
-    
+
+        return Box(matchx, matchy, templateW, templateH, maxVal)
+    return
+
 
 def loadImage(img2load,
-                gray:bool):
-    
-    if type(img2load) is str :
+              gray: bool):
+    if type(img2load) is str:
         assert os.path.exists(img2load)
-        return cv2.imread(img2load) if not gray else cv2.cvtColor(cv2.imread(img2load),cv2.COLOR_BGR2GRAY)
-    return np.array(img2load) if not gray else cv2.cvtColor(np.array(img2load),cv2.COLOR_BGR2GRAY)
+        return cv2.imread(img2load) if not gray else cv2.cvtColor(cv2.imread(img2load), cv2.COLOR_BGR2GRAY)
+    return np.array(img2load) if not gray else cv2.cvtColor(np.array(img2load), cv2.COLOR_BGR2GRAY)

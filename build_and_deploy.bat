@@ -1,5 +1,6 @@
 pip install build
 rmdir dist
 pip install twine
-python -m build
+pip install wheel
+python -m build --sdist --wheel
 twine upload dist/*
