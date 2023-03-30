@@ -56,22 +56,19 @@ async def main():
     await AsyncPywhatKit.sendwhatmsg("+910123456789", "Hi", 13, 30)
 
     # Same as above but Closes the Tab in 2 Seconds after Sending the Message
-    await AsyncPywhatKit.sendwhatmsg("+910123456789", "Hi", 13, 30, 15, True, 2)
+    await AsyncPywhatKit.src.sendwhatmsg("+910123456789", "Hi", 13, 30, 15, True, 2)
 
     # Send an Image to a Group with the Caption as Hello
-    await AsyncPywhatKit.sendwhats_image("AB123CDEFGHijklmn", "Images/Hello.png", "Hello")
+    await AsyncPywhatKit.src.sendwhats_image("AB123CDEFGHijklmn", "Images/Hello.png", "Hello")
 
     # Send an Image to a Contact with the no Caption
-    await AsyncPywhatKit.sendwhats_image("+910123456789", "Images/Hello.png")
+    await AsyncPywhatKit.src.sendwhats_image("+910123456789", "Images/Hello.png")
 
     # Send a WhatsApp Message to a Group at 12:00 AM
-    await AsyncPywhatKit.sendwhatmsg_to_group("AB123CDEFGHijklmn", "Hey All!", 0, 0)
+    await AsyncPywhatKit.src.sendwhatmsg_to_group("AB123CDEFGHijklmn", "Hey All!", 0, 0)
 
     # Send a WhatsApp Message to a Group instantly
-    await AsyncPywhatKit.sendwhatmsg_to_group_instantly("AB123CDEFGHijklmn", "Hey All!")
-
-    # Play a Video on YouTube
-    await AsyncPywhatKit.playonyt("PyWhatKit")
+    await AsyncPywhatKit.src.sendwhatmsg_to_group_instantly("AB123CDEFGHijklmn", "Hey All!")
 
 
 asyncio.run(main())
