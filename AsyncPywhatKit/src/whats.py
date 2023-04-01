@@ -1,11 +1,11 @@
 import time
+import typing
 import webbrowser as web
 from datetime import datetime
 from re import fullmatch
 from typing import List
 from urllib.parse import quote
 import pyperclip
-import keyboard
 import pathlib
 import pyautogui as pg
 import asyncio
@@ -234,8 +234,8 @@ async def sendwhatsmsg_to_all(
 
 async def sendimg_or_video_immediately(
         phone_no: str,
-        path: str,
-        message : str = None,
+        path: typing.Union[str, List[str]],
+        message: str = None,
         wait_time: int = 15,
         tab_close: bool = False,
         close_time: int = 3,
@@ -267,31 +267,28 @@ async def sendimg_or_video_immediately(
     await core.find_link()
     time.sleep(1)
     await core.find_photo_or_video()
-    if type(path) == str:
+    if isinstance(path, str):
         path = pathlib.Path(path)
         pyperclip.copy(str(path.resolve()))
         print("Copied")
     else:
-        strn = []
+        str_n = []
         for paths in path:
-            patha = str(pathlib.Path(paths).resolve())
-            strn.append(f'"{patha}"')
+            path_a = str(pathlib.Path(paths).resolve())
+            str_n.append(f'"{path_a}"')
 
-        print(" ".join(strn))
-        pyperclip.copy(" ".join(strn))
+        print(" ".join(str_n))
+        pyperclip.copy(" ".join(str_n))
     time.sleep(1)
-    keyboard.press("ctrl")
-    keyboard.press("v")
-    keyboard.release("v")
-    keyboard.release("ctrl")
+    pg.hotkey('ctrl', 'v')
     time.sleep(1)
-    keyboard.press("enter")
-    keyboard.release("enter")
+    pg.press('enter')
     time.sleep(1)
     if message is not None:
-        keyboard.write(message)
-    keyboard.press("enter")
-    keyboard.release("enter")
+        pyperclip.copy(message)
+        pg.hotkey('ctrl', 'v')
+    time.sleep(3)
+    pg.hotkey('enter')
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
@@ -299,7 +296,7 @@ async def sendimg_or_video_immediately(
 async def sendwhatsdoc_immediately(
         phone_no: str,
         path: str,
-        message : str = None,
+        message: str = None,
         wait_time: int = 15,
         tab_close: bool = True,
         close_time: int = 3,
@@ -338,25 +335,21 @@ None.
     else:
         strn = []
         for paths in path:
-            patha = str(pathlib.Path(paths).resolve())
-            strn.append(f'"{patha}"')
+            path_a = str(pathlib.Path(paths).resolve())
+            strn.append(f'"{path_a}"')
 
         print(" ".join(strn))
         pyperclip.copy(" ".join(strn))
 
     time.sleep(1)
-    keyboard.press("ctrl")
-    keyboard.press("v")
-    keyboard.release("v")
-    keyboard.release("ctrl")
+    pg.hotkey('ctrl', 'v')
     time.sleep(1)
-    keyboard.press("enter")
-    keyboard.release("enter")
+    pg.press('enter')
     time.sleep(1)
     if message is not None:
-        keyboard.write(message)
-    keyboard.press("enter")
-    keyboard.release("enter")
+        pyperclip.copy(message)
+    time.sleep(5)
+    pg.press('enter')
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
