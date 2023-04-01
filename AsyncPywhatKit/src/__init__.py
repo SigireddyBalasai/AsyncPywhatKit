@@ -1,5 +1,4 @@
 from platform import system
-
 from .ascii_art import image_to_ascii_art
 from .Core import core, exceptions, log
 from .handwriting import text_to_handwriting
@@ -16,7 +15,7 @@ from .whats import (
     sendwhatsmsg_to_all,
     sendwhatsdoc_immediately
 )
-
+__version__ = "2.2.5.7"
 _system = system().lower()
 if _system in ("darwin", "windows"):
     from .misc import take_screenshot

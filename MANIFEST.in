@@ -1,5 +1,5 @@
-recursive-include * \ data *.png
+recursive-include */data *.png
 recursive - exclude docs * .pyc
-recursive - exclude \docs **
+recursive - exclude /docs **
 
 

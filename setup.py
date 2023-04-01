@@ -13,7 +13,7 @@ def readme() -> str:
 
 def reqs():
     print(dir_path)
-    with open((dir_path + "//requirements.txt"), "r") as f:
+    with open(str(pathlib.Path(dir_path) / "requirements.txt"), "r") as f:
         requirements = [line.strip() for line in f]
         return requirements
 
@@ -21,7 +21,7 @@ def reqs():
 setup(
     name="AsyncPywhatKit",
     packages=['AsyncPywhatKit.src', 'AsyncPywhatKit.src.Core'],
-    version="2.2.5",
+    version="2.2.6",
     setup_requires=['setuptools_scm'],
     license="MIT",
     description="AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features",
