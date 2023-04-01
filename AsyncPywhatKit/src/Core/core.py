@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from platform import system
 from urllib.parse import quote
 from webbrowser import open
-
+from pathlib import Path
 import aiohttp
 from pyautogui import click, hotkey, moveTo, press, size, typewrite
 from pyscreeze import Box, screenshot
@@ -42,12 +42,14 @@ async def close_tab(wait_time: int = 2) -> None:
 
 def find_recent_chat():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\searchbar.png")
+    search_bar_path = str(Path(dir_path) / "data" / "searchbar.png")
+    location = locateOnScreen(search_bar_path)
     try:
         moveTo(location[0] + location[2] / 2, location[1] + location[3])
         click()
     except:
-        location = locateOnScreen(f"{dir_path}\\data\\searchbar2.png")
+        search_bar_path = str(Path(dir_path) / "data" / "searchbar2.png")
+        location = locateOnScreen(search_bar_path)
         moveTo(location[0] + location[2] / 2, location[1] + location[3])
         click()
 
@@ -55,12 +57,14 @@ def find_recent_chat():
 async def findtextbox() -> None:
     """click on text box"""
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\pywhatkit_smile1.png")
+    text_box_path = str(Path(dir_path) / "data" / "pywhatkit_smile.png")
+    location = locateOnScreen(text_box_path)
     try:
         moveTo(location[0] + 150, location[1] + 5)
         click()
     except:
-        location = locateOnScreen(f"{dir_path}\\data\\pywhatkit_smile.png")
+        text_box_path = str(Path(dir_path) / "data" / "pywhatkit_smile1.png")
+        location = locateOnScreen(text_box_path)
         moveTo(location[0] + 150, location[1] + 5)
         click()
 
@@ -69,7 +73,7 @@ async def find_link():
     dir_path = os.path.dirname(os.path.realpath(__file__))
     print(f"{dir_path}\\data\\link.png")
     linkpaths = ["link.png", "link2.png"]
-    locations = [locateOnScreen(f"{dir_path}\\data\\{loc}", grayscale=True, confidence=0.9, multiscale=True) for loc in
+    locations = [locateOnScreen(str(Path(dir_path) / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in
                  linkpaths]
     location = None
     y = 0
@@ -84,7 +88,8 @@ async def find_link():
 
 async def find_document():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\document.png", confidence=0.8, multiscale=True, grayscale=True)
+    document_path = str(Path(dir_path) / "data" / "document.png")
+    location = locateOnScreen(document_path, confidence=0.8, multiscale=True, grayscale=True)
     print(location)
 
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
@@ -93,7 +98,8 @@ async def find_document():
 
 async def find_photo_or_video():
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    location = locateOnScreen(f"{dir_path}\\data\\photo_or_video.png",confidence=0.8, multiscale=True, grayscale=True)
+    photo_path = str(Path(dir_path) / "data" / "photo_or_video.png")
+    location = locateOnScreen(photo_path, confidence=0.8, multiscale=True, grayscale=True)
     print(location)
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
