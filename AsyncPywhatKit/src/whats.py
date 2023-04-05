@@ -1,11 +1,11 @@
 import time
+import typing
 import webbrowser as web
 from datetime import datetime
 from re import fullmatch
 from typing import List
 from urllib.parse import quote
 import pyperclip
-import keyboard
 import pathlib
 import pyautogui as pg
 import asyncio
@@ -19,8 +19,8 @@ async def main():
     await core.check_connection()
 
 
-loop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+asyncio.create_task(main())
+asyncio.ensure_future(main())
 
 
 async def sendwhatmsg_instantly(
@@ -165,7 +165,7 @@ async def sendwhatmsg_to_group(
         f"In {sleep_time} Seconds WhatsApp will open and after {wait_time} Seconds Message will be Delivered!"
     )
     await asyncio.sleep(sleep_time)
-    await sendwhatmsg_instantly(group_id, message)
+    await sendwhatmsg_to_group_instantly(group_id, message, wait_time, tab_close, close_time)
     await log.log_message(_time=current_time, receiver=group_id, message=message)
     if tab_close:
         await core.close_tab(wait_time=close_time)
@@ -194,8 +194,15 @@ async def sendwhatmsg_to_group_instantly(
     """
     current_time = time.localtime()
     await asyncio.sleep(4)
-    await sendwhatmsg_instantly(group_id, message)
-    await log.log_message(_time=current_time, receiver=group_id, message=message)
+    web.open(f"https://web.whatsapp.com/accept?code={group_id}", new=0)
+    await asyncio.sleep(wait_time)
+    pyperclip.copy(message)
+    pg.hotkey('ctrl','v')
+    await asyncio.sleep(1)
+    pg.press('enter')
+    await asyncio.sleep(close_time)
+    if tab_close:
+        await core.close_tab(wait_time=close_time)
 
     if tab_close:
         await core.close_tab(wait_time=close_time)
@@ -234,8 +241,9 @@ async def sendwhatsmsg_to_all(
 
 async def sendimg_or_video_immediately(
         phone_no: str,
-        path: str,
-        message : str = None,
+        path: typing.Union[str, List[str]],
+        message: str = None,
+        group_id:str = None,
         wait_time: int = 15,
         tab_close: bool = False,
         close_time: int = 3,
@@ -257,49 +265,48 @@ async def sendimg_or_video_immediately(
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
-
-    phone_no = phone_no.replace(" ", "")
-    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
-        raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
-
-    web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    if(phone_no is not None):
+        phone_no = phone_no.replace(" ", "")
+        if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
+            raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
+        web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    elif(group_id is not None):
+        web.open(f"https://web.whatsapp.com/accept?code={group_id}")
     time.sleep(wait_time)
     await core.find_link()
     time.sleep(1)
     await core.find_photo_or_video()
-    if type(path) == str:
+    if isinstance(path, str):
         path = pathlib.Path(path)
         pyperclip.copy(str(path.resolve()))
         print("Copied")
     else:
-        strn = []
+        str_n = []
         for paths in path:
-            patha = str(pathlib.Path(paths).resolve())
-            strn.append(f'"{patha}"')
+            path_a = str(pathlib.Path(paths).resolve())
+            str_n.append(f'"{path_a}"')
 
-        print(" ".join(strn))
-        pyperclip.copy(" ".join(strn))
+        print(" ".join(str_n))
+        pyperclip.copy(" ".join(str_n))
     time.sleep(1)
-    keyboard.press("ctrl")
-    keyboard.press("v")
-    keyboard.release("v")
-    keyboard.release("ctrl")
+    pg.hotkey('ctrl', 'v')
     time.sleep(1)
-    keyboard.press("enter")
-    keyboard.release("enter")
+    pg.press('enter')
     time.sleep(1)
     if message is not None:
-        keyboard.write(message)
-    keyboard.press("enter")
-    keyboard.release("enter")
+        pyperclip.copy(message)
+        pg.hotkey('ctrl', 'v')
+    time.sleep(3)
+    pg.hotkey('enter')
     if tab_close:
         await core.close_tab(wait_time=close_time)
 
 
 async def sendwhatsdoc_immediately(
-        phone_no: str,
-        path: str,
-        message : str = None,
+        phone_no: str=None,
+        path: str = None,
+        group_id:str = None,
+        message: str = None,
         wait_time: int = 15,
         tab_close: bool = True,
         close_time: int = 3,
@@ -321,12 +328,13 @@ None.
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
-
-    phone_no = phone_no.replace(" ", "")
-    if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
-        raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
-
-    web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    if(phone_no is not None):
+        phone_no = phone_no.replace(" ", "")
+        if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
+            raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
+        web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
+    elif(group_id is not None):
+        web.open(f"https://web.whatsapp.com/accept?code={group_id}")
     time.sleep(wait_time)
     await core.find_link()
     time.sleep(1)
@@ -338,25 +346,21 @@ None.
     else:
         strn = []
         for paths in path:
-            patha = str(pathlib.Path(paths).resolve())
-            strn.append(f'"{patha}"')
+            path_a = str(pathlib.Path(paths).resolve())
+            strn.append(f'"{path_a}"')
 
         print(" ".join(strn))
         pyperclip.copy(" ".join(strn))
 
     time.sleep(1)
-    keyboard.press("ctrl")
-    keyboard.press("v")
-    keyboard.release("v")
-    keyboard.release("ctrl")
+    pg.hotkey('ctrl', 'v')
     time.sleep(1)
-    keyboard.press("enter")
-    keyboard.release("enter")
+    pg.press('enter')
     time.sleep(1)
     if message is not None:
-        keyboard.write(message)
-    keyboard.press("enter")
-    keyboard.release("enter")
+        pyperclip.copy(message)
+    time.sleep(5)
+    pg.press('enter')
     if tab_close:
         await core.close_tab(wait_time=close_time)
 

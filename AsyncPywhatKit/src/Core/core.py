@@ -57,6 +57,7 @@ def find_recent_chat():
 async def findtextbox() -> None:
     """click on text box"""
     dir_path = os.path.dirname(os.path.realpath(__file__))
+    print(dir_path)
     text_box_path = str(Path(dir_path) / "data" / "pywhatkit_smile.png")
     location = locateOnScreen(text_box_path)
     try:
@@ -71,6 +72,7 @@ async def findtextbox() -> None:
 
 async def find_link():
     dir_path = os.path.dirname(os.path.realpath(__file__))
+    print(dir_path)
     print(f"{dir_path}\\data\\link.png")
     linkpaths = ["link.png", "link2.png"]
     locations = [locateOnScreen(str(Path(dir_path) / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in
