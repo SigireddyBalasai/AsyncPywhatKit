@@ -1,4 +1,4 @@
-![image](https://media.discordapp.net/attachments/842794167134453820/882227960613048350/unknown.png?width=1440&height=420)
+![image](logo.png)
 
 [![image](https://flat.badgen.net/github/stars/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/stargazers)
 [![image](https://flat.badgen.net/github/forks/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/network/members)
