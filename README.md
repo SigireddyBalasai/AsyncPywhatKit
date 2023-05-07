@@ -1,4 +1,4 @@
-![image](logo.png)
+![image](https://github.com/SigireddyBalasai/AsyncPywhatKit/blob/main/logo.png?raw=true)
 
 [![image](https://flat.badgen.net/github/stars/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/stargazers)
 [![image](https://flat.badgen.net/github/forks/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/network/members)
@@ -17,7 +17,6 @@
   <img alt="Coverity Scan Build Status"
        src="https://img.shields.io/coverity/scan/27211.svg"/>
 </a>
-<!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
 [AsyncPywhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.
