@@ -1,4 +1,4 @@
-![image](https://github.com/SigireddyBalasai/AsyncPywhatKit/blob/main/logo.png?raw=true)
+[![image](https://raw.githubusercontent.com/SigireddyBalasai/AsyncPywhatKit/main/logo.png)](https://raw.githubusercontent.com/SigireddyBalasai/AsyncPywhatKit/main/logo.png)
 
 [![image](https://flat.badgen.net/github/stars/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/stargazers)
 [![image](https://flat.badgen.net/github/forks/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/network/members)
