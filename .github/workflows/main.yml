@@ -17,10 +17,12 @@ jobs:
         run: |
           pip install -r requirements.txt
           pip install sphinx sphinx_rtd_theme
+          pip install -e .
           cd AsyncPywhatKit/docs
           sphinx-apidoc -o . ..
           make clean html
           make html
-          git add .
-          git commit -m "Generated documentation"
-          git push gh-pages
+          - name: Deploy
+      - uses: peaceiris/actions-gh-pages@v2
+        with:
+          publish_dir: ./_build
