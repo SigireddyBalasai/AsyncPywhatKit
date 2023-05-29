@@ -22,7 +22,7 @@ jobs:
           sphinx-apidoc -o . ..
           make clean html
           make html
-          - name: Deploy
-      - uses: peaceiris/actions-gh-pages@v2
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v2
         with:
           publish_dir: ./_build
