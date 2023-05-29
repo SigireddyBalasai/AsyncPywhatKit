@@ -87,6 +87,22 @@ async def find_link():
     moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
     click()
 
+async def find_pool():
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    print(dir_path)
+    print(f"{dir_path}\\data\\link.png")
+    linkpaths = ["link.png", "link2.png"]
+    locations = [locateOnScreen(str(Path(dir_path) / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in
+                 linkpaths]
+    location = None
+    y = 0
+    for poslink in locations:
+        if poslink is not None and poslink[1] > y:
+            y = poslink[1]
+            location = poslink
+    print(location)
+    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+    click()
 
 async def find_document():
     dir_path = os.path.dirname(os.path.realpath(__file__))

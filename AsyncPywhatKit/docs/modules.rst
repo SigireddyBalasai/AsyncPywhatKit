@@ -1,7 +1,7 @@
-src
-===
+AsyncPywhatKit
+==============
 
 .. toctree::
    :maxdepth: 4
 
-   src
+   AsyncPywhatKit

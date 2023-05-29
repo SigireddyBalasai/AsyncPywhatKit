@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: AsyncPywhatKit
-Version: 2.2.7
+Version: 2.2.7.3
 Summary: AsyncPywhatKit is a Simple and Powerful WhatsApp Automation Library with many useful Features
 Home-page: https://github.com/SigireddyBalasai/AsyncPywhatKit
 Download-URL: https://github.com/SigireddyBalasai/AsyncPywhatKit/archive/refs/tags/1.0.tar.gz
@@ -19,7 +19,7 @@ Classifier: Programming Language :: Python :: 3.11
 Description-Content-Type: text/markdown
 License-File: LICENSE.md
 
-![image](https://media.discordapp.net/attachments/842794167134453820/882227960613048350/unknown.png?width=1440&height=420)
+[![image](https://raw.githubusercontent.com/SigireddyBalasai/AsyncPywhatKit/main/logo.png)](https://raw.githubusercontent.com/SigireddyBalasai/AsyncPywhatKit/main/logo.png)
 
 [![image](https://flat.badgen.net/github/stars/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/stargazers)
 [![image](https://flat.badgen.net/github/forks/SigireddyBalasai/AsyncPywhatKit)](https://github.com/SigireddyBalasai/AsyncPywhatKit/network/members)
@@ -38,7 +38,6 @@ License-File: LICENSE.md
   <img alt="Coverity Scan Build Status"
        src="https://img.shields.io/coverity/scan/27211.svg"/>
 </a>
-<!-- ![logo](https://github.com/Ankit404butfound/PyWhatKit/raw/master/Images/logo.png?raw=true) -->
 
 
 [AsyncPywhatKit](https://pypi.org/project/AsyncPywhatKit/) is a Python library with various helpful features. It's easy-to-use and does not require you to do any additional setup. Currently, it is one of the most popular library for WhatsApp and YouTube automation. New updates are released frequently with new features and bug fixes.

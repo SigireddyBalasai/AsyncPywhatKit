@@ -18,9 +18,12 @@ async def main():
     """Check the internet connection."""
     await core.check_connection()
 
+try:
+    asyncio.create_task(main())
+    asyncio.ensure_future(main())
+except:
+    asyncio.run(main())
 
-asyncio.create_task(main())
-asyncio.ensure_future(main())
 
 
 async def sendwhatmsg_instantly(

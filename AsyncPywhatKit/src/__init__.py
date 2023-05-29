@@ -15,7 +15,7 @@ from .whats import (
     sendwhatsmsg_to_all,
     sendwhatsdoc_immediately
 )
-__version__ = "2.2.5.7"
+__version__ = "2.2.7.2"
 _system = system().lower()
 if _system in ("darwin", "windows"):
     from .misc import take_screenshot
