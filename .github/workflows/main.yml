@@ -29,6 +29,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token : ${{ secrets.PUSH_SECRET}}
-          publish_dir: .
+          publish_dir: "./AsyncPywhatKit/docs/_build/html"
           cname : AsyncPywhatKit.sigireddybalasai.tech
           external_repository: SigireddyBalasai/AsyncPywhatKit.github.io
