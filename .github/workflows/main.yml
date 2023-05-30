@@ -27,3 +27,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_build
+          cname : AsyncPywhatKit.sigireddybalasai.tech
+          external_repository: SigireddyBalasai/AsyncPywhatKit.github.io
