@@ -18,14 +18,17 @@ jobs:
           pip install -r requirements.txt
           pip install sphinx sphinx_rtd_theme
           pip install -e .
-          cd AsyncPywhatKit/docs
+          cd AsyncPywhatKit
+          cd docs
+          mkdir _static
           sphinx-apidoc -o . ..
           make clean html
           make html
+          
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./_build
+          publish_dir: .
           cname : AsyncPywhatKit.sigireddybalasai.tech
           external_repository: SigireddyBalasai/AsyncPywhatKit.github.io
