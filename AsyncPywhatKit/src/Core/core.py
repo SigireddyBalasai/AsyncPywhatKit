@@ -275,6 +275,7 @@ def locateMax_opencv(template: str,
 def loadImage(img2load,
               gray: bool):
     if type(img2load) is str:
-        assert os.path.exists(img2load)
+        if not os.path.exists(img2load):
+            raise AssertionError
         return cv2.imread(img2load) if not gray else cv2.cvtColor(cv2.imread(img2load), cv2.COLOR_BGR2GRAY)
     return np.array(img2load) if not gray else cv2.cvtColor(np.array(img2load), cv2.COLOR_BGR2GRAY)
