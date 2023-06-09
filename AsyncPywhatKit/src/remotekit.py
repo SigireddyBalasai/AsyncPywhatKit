@@ -293,7 +293,7 @@ def slashN() -> str:
 def ghasit_mouse() -> str:
     global drag
     # print(drag)
-    if drag == True:
+    if drag is True:
         drag = False
         p.mouseUp()
 
