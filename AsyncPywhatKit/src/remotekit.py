@@ -270,7 +270,7 @@ def typeit() -> str:
     data = request.form["data"]
     type_data = str(data)
     if len(type_data) > len(old_data):
-        p.typewrite(type_data[len(type_data) - 1])
+        p.typewrite(type_data[-1])
     else:
         p.press("backspace", len(old_data) - len(type_data))
     old_data = type_data
