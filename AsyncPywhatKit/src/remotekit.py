@@ -27,9 +27,7 @@ coords = [(0, 0)]
 
 @app.route("/", methods=["GET", "POST"])
 def send() -> str:
-    # print("here")
     if request.method == "POST":
-        # print(request.get_json())
         return "ok"
     return """<!DOCTYPE html>
 <html>
@@ -215,8 +213,6 @@ def handle() -> str:
     coords = (a, b)
     lx, ly = lastcords
     cx, cy = coords
-    # print(cx,cy)
-    # p.moveRel((cx-lx)/2,(cy-ly)/2)
     threading.Thread(target=lambda: p.moveRel((cx - lx) * 2, (cy - ly) * 2)).start()
     lastcords = coords
     return "1"
@@ -243,10 +239,8 @@ def scrollerr() -> str:
 @app.route("/tstart", methods=["POST"])
 def startt() -> str:
     global lastcords, lastcords2
-    # print("end")
     a = request.form["a"]
     b = request.form["b"]
-    # print(a,b)
     a = float(a)
     b = float(b)
     lastcords = (a, b)
@@ -311,13 +305,3 @@ def start_server(port=8000, print_msg=True):
     app.run(host="0.0.0.0", port=port)
 
 
-# app.run(host='0.0.0.0')
-#
-#
-# def main():
-#     app.run(host="192.168.43.17", port=33)
-#
-#
-# if __name__ == "__main__":
-#     main()
-#     app.run(host='localhost')
