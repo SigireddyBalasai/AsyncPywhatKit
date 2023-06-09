@@ -34,16 +34,16 @@ async def sendwhatmsg_instantly(
         close_time: int = 3
 ) -> None:
     """Send a WhatsApp message instantly.
-    
+
     This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends a message to the specified phone number.
-    
+
     Parameters:
     message: The message to be sent.
     phone_no: The phone number to send the message to.
     wait_time: The time to wait before sending the message (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the message.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
@@ -74,9 +74,9 @@ async def sendwhatmsg(
         close_time: int = 3,
 ) -> None:
     """Send a WhatsApp message at a certain time.
-    
+
     This function schedules the sending of a WhatsApp message to a specified phone number at a specified time.
-    
+
     Parameters:
     phone_no: The phone number to send the message to.
     message: The message to be sent.
@@ -85,7 +85,7 @@ async def sendwhatmsg(
     wait_time: The time to wait before sending the message (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the message.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
@@ -132,9 +132,9 @@ async def sendwhatmsg_to_group(
         close_time: int = 3,
 ) -> None:
     """Send a WhatsApp message to a group at a certain time.
-    
+
     This function schedules the sending of a WhatsApp message to a specified group at a specified time.
-    
+
     Parameters:
     group_id: The ID of the group to send the message to.
     message: The message to be sent.
@@ -143,7 +143,7 @@ async def sendwhatmsg_to_group(
     wait_time: The time to wait before sending the message (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the message.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
@@ -182,16 +182,16 @@ async def sendwhatmsg_to_group_instantly(
         close_time: int = 3,
 ) -> None:
     """Send a WhatsApp message to a group instantly.
-    
+
     This function opens the WhatsApp Web page in a new tab and sends a message to the specified group.
-    
+
     Parameters:
     group_id: The ID of the group to send the message to.
     message: The message to be sent.
     wait_time: The time to wait before sending the message (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the message.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
@@ -221,9 +221,9 @@ async def sendwhatsmsg_to_all(
         close_time: int = 3,
 ) -> None:
     """Send a WhatsApp message to a list of phone numbers at a certain time.
-    
+
     This function schedules the sending of a WhatsApp message to a list of specified phone numbers at a specified time.
-    
+
     Parameters:
     phone_nos: The list of phone numbers to send the message to.
     message: The message to be sent.
@@ -232,7 +232,7 @@ async def sendwhatsmsg_to_all(
     wait_time: The time to wait before sending the message (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the message.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
@@ -252,16 +252,16 @@ async def sendimg_or_video_immediately(
         close_time: int = 3,
 ) -> None:
     """Send an image or video file via WhatsApp instantly.
-    
+
     This function opens a new tab in the default web browser, navigates to the WhatsApp web page, and sends an image or video file to the specified phone number.
-    
+
     Parameters:
     phone_no: The phone number to send the file to.
     path: The file path of the image or video file to be sent.
     wait_time: The time to wait before sending the file (in seconds).
     tab_close: A flag indicating whether to close the tab after sending the file.
     close_time: The time to wait before closing the tab (in seconds).
-    
+
     Returns:
     None.
     """
