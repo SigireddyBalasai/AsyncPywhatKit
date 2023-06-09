@@ -15,7 +15,6 @@ async def send_mail(
     email_receiver: str,
 ) -> None:
     """Send an Email"""
-
     domain = re.search("(?<=@)[^.]+(?=\\.)", email_sender)
 
     hostnames = {
@@ -51,6 +50,5 @@ async def send_hmail(
     email_sender: str, password: str, subject: str, html_code: str, email_receiver: str
 ) -> None:
     """Send an Email with HTML Code"""
-
     message = MIMEText(html_code, "html")
     await send_mail(email_sender, password, subject, message, email_receiver)
