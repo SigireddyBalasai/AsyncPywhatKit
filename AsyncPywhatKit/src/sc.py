@@ -11,7 +11,6 @@ osname = platform.system()
 
 async def shutdown(time: int = 20) -> None:
     """Schedules a Shutdown after the Specified Time"""
-
     if "window" in osname.lower():
         cont = f"shutdown -s -t {time}"
         error_code = os.system(cont)
@@ -38,7 +37,6 @@ async def shutdown(time: int = 20) -> None:
 
 def cancel_shutdown() -> None:
     """Cancels the Scheduled Shutdown"""
-
     if "window" in osname.lower():
         error_code = os.system("shutdown /a")
         if error_code == winerror.ERROR_NO_SHUTDOWN_IN_PROGRESS:

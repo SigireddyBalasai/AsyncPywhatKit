@@ -265,7 +265,6 @@ async def sendimg_or_video_immediately(
     Returns:
     None.
     """
-
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
     if phone_no is not None:
@@ -328,7 +327,6 @@ close_time: The time to wait before closing the tab (in seconds).
 Returns:
 None.
 """
-
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
     if phone_no is not None:
@@ -370,7 +368,6 @@ None.
 
 def open_web() -> bool:
     """Opens WhatsApp Web """
-
     try:
         web.open("https://web.whatsapp.com")
     except web.Error:

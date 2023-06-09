@@ -21,13 +21,11 @@ Box = collections.namedtuple('Box', 'left top width height score')
 
 async def check_number(number: str) -> bool:
     """Checks if the Number is Valid or not"""
-
     return ("+" in number) or ("_" in number)
 
 
 async def close_tab(wait_time: int = 2) -> None:
     """Closes the Currently Opened Browser Tab"""
-
     await asyncio.sleep(wait_time)
     _system = system().lower()
     if _system in ("windows", "linux"):
@@ -124,7 +122,6 @@ async def find_photo_or_video():
 
 async def check_connection() -> None:
     """Check the Internet connection of the Host Machine"""
-
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get("https://google.com") as response:
@@ -153,7 +150,6 @@ async def _web(receiver: str, message: str) -> None:
 
 async def send_message(message: str, receiver: str, wait_time: int) -> None:
     """Parses and Sends the Message"""
-
     await _web(receiver=receiver, message=message)
     await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2 + 15)

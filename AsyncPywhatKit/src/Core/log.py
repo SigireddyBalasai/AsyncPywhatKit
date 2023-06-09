@@ -21,7 +21,6 @@ async def format_message(message: str) -> str:
 
 async def log_message(_time: time.struct_time, receiver: str, message: str) -> None:
     """Logs the Message Information after it is Sent"""
-
     if not os.path.exists("PyWhatKit_DB.txt"):
         file = open("PyWhatKit_DB.txt", "w+")
         file.close()
@@ -45,7 +44,6 @@ async def log_message(_time: time.struct_time, receiver: str, message: str) -> N
 
 async def log_image(_time: time.struct_time, path: str, receiver: str, caption: str) -> None:
     """Logs the Image Information after it is Sent"""
-
     if not os.path.exists("PyWhatKit_DB.txt"):
         file = open("PyWhatKit_DB.txt", "w+")
         file.close()

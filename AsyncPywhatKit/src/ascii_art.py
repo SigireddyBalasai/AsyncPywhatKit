@@ -7,7 +7,6 @@ async def image_to_ascii_art(
     img_path: str, output_file: Optional[str] = "pywhatkit_asciiart"
 ) -> str:
     """Convert an Image to ASCII Art"""
-
     img = Image.open(img_path).convert("L")
 
     width, height = img.size
