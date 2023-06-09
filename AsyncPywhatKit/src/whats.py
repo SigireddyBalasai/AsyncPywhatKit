@@ -268,12 +268,12 @@ async def sendimg_or_video_immediately(
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
-    if(phone_no is not None):
+    if phone_no is not None:
         phone_no = phone_no.replace(" ", "")
         if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
             raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
         web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
-    elif(group_id is not None):
+    elif group_id is not None:
         web.open(f"https://web.whatsapp.com/accept?code={group_id}")
     time.sleep(wait_time)
     await core.find_link()
@@ -331,12 +331,12 @@ None.
 
     if not await core.check_number(number=phone_no):
         raise exceptions.CountryCodeException("Country Code Missing in Phone Number!")
-    if(phone_no is not None):
+    if phone_no is not None:
         phone_no = phone_no.replace(" ", "")
         if not fullmatch(r"^\+?[0-9]{2,4}\s?[0-9]{9,15}", phone_no):
             raise exceptions.InvalidPhoneNumber("Invalid Phone Number.")
         web.open(f"https://web.whatsapp.com/send?phone={phone_no}")
-    elif(group_id is not None):
+    elif group_id is not None:
         web.open(f"https://web.whatsapp.com/accept?code={group_id}")
     time.sleep(wait_time)
     await core.find_link()
