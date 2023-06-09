@@ -257,8 +257,7 @@ def locateMax_opencv(template: str,
                     matchy = maxLoc[1]
         if matchx is not None:
             return Box(matchx, matchy, templateW, templateH, maxVal)
-        else:
-            raise ImageNotFoundException
+        raise ImageNotFoundException
 
     result = cv2.matchTemplate(screenImage, template, cv2.TM_CCORR_NORMED)
     (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)

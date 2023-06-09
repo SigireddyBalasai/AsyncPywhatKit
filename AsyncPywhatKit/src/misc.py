@@ -57,7 +57,7 @@ async def playonyt(topic: str, use_api: bool = False, open_video: bool = True) -
                     if open_video:
                         web.open(await response.content.decode("ascii"))
                     return await response.read().decode("ascii")
-                elif 400 <= status_code <= 599:
+                if 400 <= status_code <= 599:
                     raise exceptions.UnableToAccessApi(
                 "Unable to access pywhatkit api right now"
                     )
