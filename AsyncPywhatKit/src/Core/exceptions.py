@@ -18,7 +18,7 @@ class ImageNotFoundException(Exception):
     No image was finded while searching with template matching algorithm
     """
     pass
-    
+
 
 class InternetException(Exception):
     """
