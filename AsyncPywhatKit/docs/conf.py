@@ -10,7 +10,6 @@ import sys
 
 sys.path.insert(0, os.path.abspath('..'))
 print('*************')
-import src
 
 project = 'AsyncPywhatKit'
 copyright = '2023, Sigireddy Balasai'

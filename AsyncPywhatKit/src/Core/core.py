@@ -1,7 +1,6 @@
 import asyncio
 import os
 import collections
-import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from platform import system
 from urllib.parse import quote
