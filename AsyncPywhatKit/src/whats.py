@@ -342,7 +342,7 @@ None.
     await core.find_link()
     time.sleep(1)
     await core.find_document()
-    if type(path) == str:
+    if type(path) is str:
         path = pathlib.Path(path)
         pyperclip.copy(str(path.resolve()))
         print("Copied")
