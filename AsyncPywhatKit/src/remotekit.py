@@ -203,7 +203,6 @@ function enter_but(){
 
 @app.route("/handler", methods=["POST"])
 def handle() -> str:
-    global moving, cordlst, lastcords
     lst = []
     a = request.form["a"]
     b = request.form["b"]
@@ -220,7 +219,6 @@ def handle() -> str:
 
 @app.route("/scroller", methods=["POST"])
 def scrollerr() -> str:
-    global moving, cordlst, lastcords2
     a = request.form["a"]
     b = request.form["b"]
     a = float(a)
