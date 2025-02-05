@@ -1,0 +1,24 @@
+[project]
+name = "asyncpywhatkit"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.11.11",
+    "asyncio>=3.4.3",
+    "flask>=3.1.0",
+    "mkdocstrings>=0.28.0",
+    "numpy>=2.2.2",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.1.0",
+    "pyautogui>=0.9.54",
+    "pydantic>=2.10.6",
+    "pyperclip>=1.9.0",
+    "wikipedia>=1.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.6.2",
+]

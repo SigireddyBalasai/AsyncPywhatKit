@@ -1,7 +1,0 @@
-black
-isort
-Pillow
-pre-commit
-pyautogui
-requests
-wikipedia

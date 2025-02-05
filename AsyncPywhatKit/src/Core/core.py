@@ -1,6 +1,5 @@
 import asyncio
 import os
-import collections
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from platform import system
 from urllib.parse import quote
@@ -8,7 +7,7 @@ from webbrowser import open
 from pathlib import Path
 import aiohttp
 from pyautogui import click, hotkey, moveTo, press, size, typewrite
-from pyscreeze import Box, screenshot
+from pyscreeze import screenshot
 import cv2
 import numpy as np
 
@@ -19,9 +18,7 @@ WIDTH, HEIGHT = size()
 Box = collections.namedtuple('Box', 'left top width height score')
 
 
-async def check_number(number: str) -> bool:
-    """Checks if the Number is Valid or not"""
-    return ("+" in number) or ("_" in number)
+
 
 
 async def close_tab(wait_time: int = 2) -> None:
@@ -38,86 +35,60 @@ async def close_tab(wait_time: int = 2) -> None:
 
 
 def find_recent_chat():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    search_bar_path = str(Path(dir_path) / "data" / "searchbar.png")
-    location = locateOnScreen(search_bar_path)
+    dir_path = Path(__file__).resolve().parent
+    search_bar_path = dir_path / "data" / "searchbar.png"
+    location = locateOnScreen(str(search_bar_path))
     try:
         moveTo(location[0] + location[2] / 2, location[1] + location[3])
         click()
     except:
-        search_bar_path = str(Path(dir_path) / "data" / "searchbar2.png")
-        location = locateOnScreen(search_bar_path)
+        search_bar_path = dir_path / "data" / "searchbar2.png"
+        location = locateOnScreen(str(search_bar_path))
         moveTo(location[0] + location[2] / 2, location[1] + location[3])
         click()
 
 
-async def findtextbox() -> None:
-    """click on text box"""
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
-    text_box_path = str(Path(dir_path) / "data" / "pywhatkit_smile.png")
-    location = locateOnScreen(text_box_path)
+async def find_textbox() -> None:
+    """Click on text box"""
+    dir_path = Path(__file__).resolve().parent
+    text_box_path = dir_path / "data" / "pywhatkit_smile.png"
+    location = locateOnScreen(str(text_box_path))
     try:
         moveTo(location[0] + 150, location[1] + 5)
         click()
     except:
-        text_box_path = str(Path(dir_path) / "data" / "pywhatkit_smile1.png")
-        location = locateOnScreen(text_box_path)
+        text_box_path = dir_path / "data" / "pywhatkit_smile1.png"
+        location = locateOnScreen(str(text_box_path))
         moveTo(location[0] + 150, location[1] + 5)
         click()
 
 
 async def find_link():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
-    print(f"{dir_path}\\data\\link.png")
-    linkpaths = ["link.png", "link2.png"]
-    locations = [locateOnScreen(str(Path(dir_path) / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in
-                 linkpaths]
-    location = None
-    y = 0
-    for poslink in locations:
-        if poslink is not None and poslink[1] > y:
-            y = poslink[1]
-            location = poslink
-    print(location)
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-    click()
+    dir_path = Path(__file__).resolve().parent
+    link_paths = ["link.png", "link2.png"]
+    locations = [locateOnScreen(str(dir_path / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in link_paths]
+    location = max(locations, key=lambda loc: loc[1] if loc else 0)
+    if location:
+        moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+        click()
 
-async def find_pool():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
-    print(f"{dir_path}\\data\\link.png")
-    linkpaths = ["link.png", "link2.png"]
-    locations = [locateOnScreen(str(Path(dir_path) / "data" / loc), grayscale=True, confidence=0.9, multiscale=True) for loc in
-                 linkpaths]
-    location = None
-    y = 0
-    for poslink in locations:
-        if poslink is not None and poslink[1] > y:
-            y = poslink[1]
-            location = poslink
-    print(location)
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-    click()
 
 async def find_document():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    document_path = str(Path(dir_path) / "data" / "document.png")
-    location = locateOnScreen(document_path, confidence=0.8, multiscale=True, grayscale=True)
-    print(location)
-
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-    click()
+    dir_path = Path(__file__).resolve().parent
+    document_path = dir_path / "data" / "document.png"
+    location = locateOnScreen(str(document_path), confidence=0.8, multiscale=True, grayscale=True)
+    if location:
+        moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+        click()
 
 
 async def find_photo_or_video():
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    photo_path = str(Path(dir_path) / "data" / "photo_or_video.png")
-    location = locateOnScreen(photo_path, confidence=0.8, multiscale=True, grayscale=True)
-    print(location)
-    moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
-    click()
+    dir_path = Path(__file__).resolve().parent
+    photo_path = dir_path / "data" / "photo_or_video.png"
+    location = locateOnScreen(str(photo_path), confidence=0.8, multiscale=True, grayscale=True)
+    if location:
+        moveTo(location[0] + location[2] / 2, location[1] + location[3] / 2)
+        click()
 
 
 async def check_connection() -> None:
@@ -125,152 +96,87 @@ async def check_connection() -> None:
     try:
         async with aiohttp.ClientSession() as session:
             async with session.get("https://google.com") as response:
-                status = response.status
-                if status < 400:
-                    pass
-
+                if response.status >= 400:
+                    raise InternetException("Error while connecting to the Internet.")
     except:
-        raise InternetException(
-            "Error while connecting to the Internet. Make sure you are connected to the Internet!"
-        )
+        raise InternetException("Error while connecting to the Internet. Make sure you are connected to the Internet!")
 
 
 async def _web(receiver: str, message: str) -> None:
     """Opens WhatsApp Web based on the Receiver"""
-    if check_number(number=receiver):
-        open(
-            "https://web.whatsapp.com/send?phone="
-            + receiver
-            + "&text="
-            + quote(message)
-        )
+    if await check_number(receiver):
+        open(f"https://web.whatsapp.com/send?phone={receiver}&text={quote(message)}")
     else:
-        open("https://web.whatsapp.com/accept?code=" + receiver)
+        open(f"https://web.whatsapp.com/accept?code={receiver}")
 
 
 async def send_message(message: str, receiver: str, wait_time: int) -> None:
     """Parses and Sends the Message"""
-    await _web(receiver=receiver, message=message)
+    await _web(receiver, message)
     await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2 + 15)
     await asyncio.sleep(wait_time - 7)
-    await _web(receiver=receiver, message=message)
+    await _web(receiver, message)
     await asyncio.sleep(7)
     click(WIDTH / 2, HEIGHT / 2)
     await asyncio.sleep(wait_time - 7)
-    if not check_number(number=receiver):
+    if not await check_number(receiver):
         for char in message:
             if char == "\n":
                 hotkey("shift", "enter")
             else:
                 typewrite(char)
-    await findtextbox()
+    await find_textbox()
     press("enter")
 
 
-def locateOnScreen(image, **kwargs):
-    """Locate button on screen using cv2.TemplateMatching algorithm
-
-        Parameters
-        ----------
-        image : str
-            The file location of the template image
-        grayscale : bool
-            Flag to run template matching using grayscale image
-        confidence : float
-            Confidence Threshold
-        mulstiscale : bool
-            Flag to run mulstiscale template matching from 1 to 0.8
-
-        Returns
-        -------
-        Box
-            a tuple of (x,y,w,h) of the best match
-    """
-    screenshotIm = screenshot(region=None)
-    boxresult = locateMax_opencv(image, screenshotIm, **kwargs)
+def locateOnScreen(image: str, **kwargs) -> Box:
+    """Locate button on screen using cv2.TemplateMatching algorithm"""
+    screenshot_im = screenshot(region=None)
+    box_result = locateMax_opencv(image, screenshot_im, **kwargs)
     try:
-        screenshotIm.fp.close()
+        screenshot_im.fp.close()
     except AttributeError:
-        # FROM pyscreeze
-        # Screenshots on Windows won't have an fp since they came from
-        # ImageGrab, not a file. Screenshots on Linux will have fp set
-        # to None since the file has been unlinked
         pass
-    return boxresult
+    return box_result
 
 
-def locateMax_opencv(template: str,
-                     screenImage: str,
-                     grayscale: bool = False,
-                     confidence=0.9,
-                     multiscale=False) -> Box:
-    """Locate button using cv2.TemplateMatching algorithm
-
-        Parameters
-        ----------
-        template : str
-            The file location of the template image
-        screenImage : PIL.Image
-            The screenshot done using pyscreeze
-        grayscale : bool
-            Flag to run template matching using grayscale image
-        confidence : float
-            Confidence Threshold
-        mulstiscale : bool
-            Flag to run mulstiscale template matching from 1 to 0.8
-
-        Returns
-        -------
-        Box
-            a tuple of (x,y,w,h) of the best match
-    """
-    confidence = float(confidence)
-
+def locateMax_opencv(template: str, screen_image: str, grayscale: bool = False, confidence: float = 0.9, multiscale: bool = False) -> Box:
+    """Locate button using cv2.TemplateMatching algorithm"""
     template = loadImage(template, grayscale)
-    templateH, templateW = template.shape[:2]
-    screenImage = loadImage(screenImage, grayscale)
+    template_h, template_w = template.shape[:2]
+    screen_image = loadImage(screen_image, grayscale)
 
-    if (screenImage.shape[0] < template.shape[0] or
-            screenImage.shape[1] < template.shape[1]):
-        # avoid semi-cryptic OpenCV error below if bad size
+    if screen_image.shape[0] < template.shape[0] or screen_image.shape[1] < template.shape[1]:
         raise ValueError('needle dimension(s) exceed the haystack image or region dimensions')
 
     if multiscale:
         sizes = [1, 0.9, 0.85, 0.8]
-        matchx, matchy = None, None
+        match_x, match_y = None, None
         with ThreadPoolExecutor() as executor:
-            future_to_contour = {executor.submit(cv2.matchTemplate,
-                                                 screenImage.copy(),
-                                                 cv2.resize(template.copy(), (0, 0), fx=size, fy=size),
-                                                 cv2.TM_CCORR_NORMED): size for size in sizes}
+            future_to_contour = {executor.submit(cv2.matchTemplate, screen_image.copy(), cv2.resize(template.copy(), (0, 0), fx=size, fy=size), cv2.TM_CCORR_NORMED): size for size in sizes}
             for future in as_completed(future_to_contour):
-                _, maxVal, _, maxLoc = cv2.minMaxLoc(future.result())
-                if maxVal >= confidence:
-                    confidence = maxVal
-                    matchx = maxLoc[0]
-                    matchy = maxLoc[1]
-        if matchx is not None:
-            return Box(matchx, matchy, templateW, templateH, maxVal)
+                _, max_val, _, max_loc = cv2.minMaxLoc(future.result())
+                if max_val >= confidence:
+                    confidence = max_val
+                    match_x = max_loc[0]
+                    match_y = max_loc[1]
+        if match_x is not None:
+            return Box(match_x, match_y, template_w, template_h, max_val)
         raise ImageNotFoundException
 
-    result = cv2.matchTemplate(screenImage, template, cv2.TM_CCORR_NORMED)
-    (_, maxVal, _, maxLoc) = cv2.minMaxLoc(result)
+    result = cv2.matchTemplate(screen_image, template, cv2.TM_CCORR_NORMED)
+    _, max_val, _, max_loc = cv2.minMaxLoc(result)
 
-    if len(result) == 0:
-        raise ImageNotFoundException
-    if maxVal >= confidence:
-        matchx = maxLoc[0]
-        matchy = maxLoc[1]
-
-        return Box(matchx, matchy, templateW, templateH, maxVal)
-    return
+    if max_val >= confidence:
+        match_x = max_loc[0]
+        match_y = max_loc[1]
+        return Box(match_x, match_y, template_w, template_h, max_val)
+    raise ImageNotFoundException
 
 
-def loadImage(img2load,
-              gray: bool):
-    if type(img2load) is str:
-        if not os.path.exists(img2load):
-            raise AssertionError
-        return cv2.imread(img2load) if not gray else cv2.cvtColor(cv2.imread(img2load), cv2.COLOR_BGR2GRAY)
-    return np.array(img2load) if not gray else cv2.cvtColor(np.array(img2load), cv2.COLOR_BGR2GRAY)
+def loadImage(img_to_load: str, gray: bool) -> np.ndarray:
+    if not os.path.exists(img_to_load):
+        raise FileNotFoundError(f"Image not found: {img_to_load}")
+    image = cv2.imread(img_to_load)
+    return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) if gray else image

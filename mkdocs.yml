@@ -1,0 +1,7 @@
+site_name: My Docs
+site_url: https://github.com/SigireddyBalasai/MyDocs
+theme:
+  name: material
+
+plugins:
+- mkdocstrings
